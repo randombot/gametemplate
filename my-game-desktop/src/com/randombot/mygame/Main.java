@@ -3,8 +3,6 @@ package com.randombot.mygame;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.randombot.mygame.MyGame;
-import com.randombot.mygame.Resolver;
 import com.randombot.mygame.screens.BaseScreen;
 
 public class Main {
