@@ -14,8 +14,8 @@ import java.io.Writer;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
-import com.badlogic.gdx.tools.imagepacker.TexturePacker2;
-import com.badlogic.gdx.tools.imagepacker.TexturePacker2.Settings;
+import com.badlogic.gdx.tools.texturepacker.TexturePacker;
+import com.badlogic.gdx.tools.texturepacker.TexturePacker.Settings;
 
 public class Packer {
 
@@ -38,8 +38,9 @@ public class Packer {
 
 		// empty tmp folder
 		File tmpDir = new File(ppath+"/design/tmp");
+		if(!tmpDir.exists())tmpDir.mkdirs();
 		System.out.println("Empty tmp folder in " + tmpDir.getAbsolutePath());
-		boolean res = tmpDir.mkdir();
+		//boolean res = tmpDir.mkdir();
 
 		// copy created files
 		File[] files = createdDir.listFiles();
@@ -107,7 +108,7 @@ public class Packer {
 		} catch (IOException e) { }
 
 
-		Settings set = new TexturePacker2.Settings();
+		Settings set = new TexturePacker.Settings();
 		set.filterMag = TextureFilter.Linear;
 		set.filterMin = TextureFilter.Linear;
 		set.pot = false;
@@ -118,7 +119,7 @@ public class Packer {
 
 		System.out.println("TexturePacker");
 		try {
-			TexturePacker2.process(set, tmpDir.getCanonicalPath(), skinDir.getCanonicalPath()+"/", "skin");
+			TexturePacker.process(set, tmpDir.getCanonicalPath(), skinDir.getCanonicalPath()+"/", "skin");
 		} catch (IOException e) { }
 
 		// Copy result to Android Project ?		
@@ -129,8 +130,8 @@ public class Packer {
 		}
 
 		// Remove tmp directory
+		System.out.println("Removing Tmp");
 		removeDirectory(tmpDir);
-
 	}
 
 	private static void copyFileUsingStream(File source, File dest) throws IOException {

@@ -6,6 +6,7 @@ public class Play extends BaseScreen {
 	@Override
 	public void create() {
 		super.create();
+		previousScreen = menu;
 
 	}
 	

@@ -16,7 +16,7 @@ import com.randombot.mygame.Resolver;
 
 public class ScreenManager extends BaseScreen {
 
-	private final String SKIN_SRC = "data/skin/holo-dark-xhdpi.json";
+	private final String SKIN_SRC = "data/skin/skin.json";
 	
 	private MyGame myGame;
 	private Resolver resol;	
@@ -87,6 +87,15 @@ public class ScreenManager extends BaseScreen {
 
 					menu = new Menu();
 					menu.create();
+					
+					help = new Help();
+					help.create();
+					
+					credits = new Credits();
+					credits.create();
+					
+					play = new Play();
+					play.create();
 					
 					game.changeScreen(menu);
 				}

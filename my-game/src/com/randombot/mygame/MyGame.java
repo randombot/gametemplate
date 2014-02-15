@@ -14,7 +14,7 @@ public class MyGame implements ApplicationListener {
 	private ScreenManager screenManager;
 	
 	//////////////////////////////////////////////////////////////////////////////////////////
-	private static boolean PACKING = true;	
+	private static final boolean PACKING = false;	
 	//////////////////////////////////////////////////////////////////////////////////////////
 	
 	public MyGame(Resolver res){
@@ -67,7 +67,7 @@ public class MyGame implements ApplicationListener {
 		cfg.useGL20 = true;
 		cfg.width = 480;
 		cfg.height = 854;		
-		//new LwjglApplication(new MyGame(new DesktopResolver()), cfg);
+		new LwjglApplication(new MyGame(new DesktopResolver()), cfg);
 	}
 	
 	private static class DesktopResolver implements Resolver {		
