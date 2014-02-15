@@ -41,6 +41,7 @@ public class MainActivity extends AndroidApplication {
 		adView = new AdView(this);
 		adView.setAdUnitId(getResources().getString(R.string.ad_unit_id));
 		adView.setAdSize(AdSize.BANNER);
+		adView.setVisibility(View.VISIBLE);
 		adView.loadAd(new AdRequest.Builder().build());
 
 		// Add the libgdx view
