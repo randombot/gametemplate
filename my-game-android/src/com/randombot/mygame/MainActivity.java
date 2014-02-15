@@ -14,6 +14,7 @@ import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 
 public class MainActivity extends AndroidApplication {
+	
 	private AdView adView;
 
 	@Override

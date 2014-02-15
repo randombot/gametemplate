@@ -13,6 +13,10 @@ public class MyGame implements ApplicationListener {
 	private Resolver resolver;
 	private ScreenManager screenManager;
 	
+	//////////////////////////////////////////////////////////////////////////////////////////
+	private static boolean PACKING = true;	
+	//////////////////////////////////////////////////////////////////////////////////////////
+	
 	public MyGame(Resolver res){
 		this.resolver = res;
 	}
@@ -57,13 +61,13 @@ public class MyGame implements ApplicationListener {
 	}
 	
 	public static void main(String[] args) {
+		if (PACKING) { Packer.compile(); }
 		LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
 		cfg.title = "my-game";
 		cfg.useGL20 = true;
 		cfg.width = 480;
-		cfg.height = 854;
-
-		new LwjglApplication(new MyGame(new DesktopResolver()), cfg);
+		cfg.height = 854;		
+		//new LwjglApplication(new MyGame(new DesktopResolver()), cfg);
 	}
 	
 	private static class DesktopResolver implements Resolver {		

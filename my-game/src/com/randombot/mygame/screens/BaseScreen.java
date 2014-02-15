@@ -22,7 +22,10 @@ public class BaseScreen {
 	protected static AssetManager am;
 	protected static Resolver resolver;
 	
-	protected static First first;
+	protected static Menu menu;
+	protected static Help help;
+	protected static Credits credits;
+	protected static Play play;
 
 	protected BaseScreen previousScreen;
 	protected Table root;
@@ -36,7 +39,7 @@ public class BaseScreen {
 	
 	protected void clearColor(){
 		GL20 gl20 = Gdx.gl20;
-		gl20.glClearColor(0f, 0f, 0f, 0f);
+		gl20.glClearColor(1f, 1f, 1f, 1f);
 		gl20.glClear(GL20.GL_COLOR_BUFFER_BIT);
 	}
 

@@ -85,10 +85,10 @@ public class ScreenManager extends BaseScreen {
 					
 					skin = am.get(SKIN_SRC, Skin.class);
 
-					first = new First();
-					first.create();
+					menu = new Menu();
+					menu.create();
 					
-					game.changeScreen(first);
+					game.changeScreen(menu);
 				}
 			});			
 		}
@@ -112,7 +112,10 @@ public class ScreenManager extends BaseScreen {
 	@Override
 	public void dispose() {
 		stage.dispose();
-		first.dispose();
+		menu.dispose();
+		help.dispose();
+		credits.dispose();
+		play.dispose();
 		am.dispose();
 		am = null;
 		stage = null;
