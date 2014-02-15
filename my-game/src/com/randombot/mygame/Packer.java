@@ -19,6 +19,7 @@ import com.badlogic.gdx.tools.imagepacker.TexturePacker2.Settings;
 
 public class Packer {
 
+	static String gameName = "my-game";
 	static String fontName = "dfpop-xhdpi";
 
 	/**
@@ -120,7 +121,12 @@ public class Packer {
 			TexturePacker2.process(set, tmpDir.getCanonicalPath(), skinDir.getCanonicalPath()+"/", "skin");
 		} catch (IOException e) { }
 
-		// Copy result to Android Project ?
+		// Copy result to Android Project ?		
+		File[] finalfiles = skinDir.listFiles();
+		for (File f : finalfiles){
+			File newfile = new File(f.getAbsolutePath().replace(gameName, gameName+"-android/assets/"));
+			try { copyFileUsingStream(f, newfile); } catch (IOException e) {}
+		}
 
 		// Remove tmp directory
 		removeDirectory(tmpDir);
