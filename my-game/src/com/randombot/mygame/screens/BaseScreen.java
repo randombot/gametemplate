@@ -30,7 +30,7 @@ public class BaseScreen {
 	protected Table root;
 
 	protected void setUpRoot(){
-		root = new Table();
+		root = new Table(skin);
 		root.setFillParent(true);
 		root.setVisible(false);
 		stage.addActor(root);

@@ -1,6 +1,5 @@
 package com.randombot.mygame;
 
-
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -24,8 +23,7 @@ public class MyGame implements ApplicationListener {
 	public void create() {
 		BaseScreen.initStatics(this, this.resolver);
 		BaseScreen.stage.getRoot().addCaptureListener(new InputListener() {			
-			public boolean touchDown(InputEvent event, float x, float y,
-					int pointer, int button) {
+			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
 				if (!(event.getTarget() instanceof TextField)) {
 					BaseScreen.stage.setKeyboardFocus(null);
 					Gdx.input.setOnscreenKeyboardVisible(false);
@@ -36,8 +34,9 @@ public class MyGame implements ApplicationListener {
 			public boolean keyDown(InputEvent event, int keycode) {
 				if(keycode == Keys.BACK || (keycode == Keys.BACKSPACE && !(event.getTarget() instanceof TextField))){					
 					MyGame.this.showingScreen.onBackPressed();
+					return true;
 				}
-				return true;
+				return false;
 			}
 		});
 		this.showingScreen = BaseScreen.first;
@@ -86,16 +85,11 @@ public class MyGame implements ApplicationListener {
 		new LwjglApplication(new MyGame(new DesktopResolver()), cfg);
 	}
 	
-	private static class DesktopResolver implements Resolver{
+	private static class DesktopResolver implements Resolver {
 		
 		@Override
-		public void resolve(String which, Object... args) {
-			if(which.equals(SHOW_INTENT)){
-				//Show intent...
-				Gdx.app.log(BaseScreen.TAG, "Showing intent");
-			} else {
-				
-			}
+		public void resolve(int which, int ... args) {
+			System.out.println("Resolve: " + which);
 		}
 	}
 	

@@ -11,7 +11,6 @@ public class First extends BaseScreen {
 	@Override
 	public void create() {
 		super.create();
-		
 		exitDialog = new Dialog("¿Salir?", skin, "dialog") {
 			protected void result(Object object) {
 				if ((Boolean) object) {
@@ -23,7 +22,7 @@ public class First extends BaseScreen {
 		}.text("¿Estás seguro?").button("¡No!", false)
 		.button("Salir", true).key(Keys.ENTER, true);
 		exitDialog.setMovable(false);
-		exitDialog.setVisible(false);
+		exitDialog.setVisible(false);	
 	}
 
 	@Override

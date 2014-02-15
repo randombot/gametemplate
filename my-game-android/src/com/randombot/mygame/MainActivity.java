@@ -9,6 +9,9 @@ import com.randombot.mygame.MyGame;
 import com.randombot.mygame.Resolver;
 
 public class MainActivity extends AndroidApplication {
+	
+	
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -27,18 +30,31 @@ public class MainActivity extends AndroidApplication {
 		initialize(new MyGame(new AndroidResolver()), cfg);
 	}
 
-	private class AndroidResolver implements Resolver{
+	private class AndroidResolver implements Resolver {
+		
 		@Override
-		public void resolve(String which, Object... args) {
-			if(which.equals(SHOW_INTENT)){
-				//Show intent...
+		public void resolve(int which, int ... args) {			
+			switch (which){
+				case ADMOB_ADS:{
+					
+					break;
+				}
+				case SWARM: {
+					
+					break;
+				}
+				case SHARE: {
+					
+					break;
+				}
+				case SHOW_URI: {
 				
-			} else {
-				
+					break;
+				}
+				default: break;
 			}
-		}    	
+		}  		
+		
 	}
-	
-	@Override
-	public void onBackPressed() { }
+		
 }

@@ -2,7 +2,8 @@ package com.randombot.mygame;
 
 public interface Resolver {
 	
-	String SHOW_INTENT = "";	
+	int SHOW_URI = 1, ADMOB_ADS = 2, SHARE = 3, SWARM = 4;	
 	
-	void resolve(String which, Object... args);
+	void resolve(int which, int ... args);
+	
 }
