@@ -2,6 +2,7 @@ package com.randombot.mygame;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
 
@@ -20,6 +21,10 @@ public class MainActivity extends AndroidApplication {
 		// Create the layout
 		RelativeLayout layout = new RelativeLayout(this);
 
+		// Do the stuff that initialize() would do for you
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,  WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
 		// Create the libgdx View
@@ -97,4 +102,6 @@ public class MainActivity extends AndroidApplication {
 
 	}
 
+	@Override
+	public void onBackPressed() { }
 }
