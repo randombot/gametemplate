@@ -10,8 +10,6 @@ import com.randombot.mygame.Resolver;
 
 public class MainActivity extends AndroidApplication {
 	
-	
-	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
