@@ -1,6 +1,7 @@
 package com.randombot.mygame.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -10,21 +11,18 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.randombot.mygame.MyGame;
 import com.randombot.mygame.Resolver;
 
-public class BaseScreen {
-
-	public static final String TAG = "MyGame";
+public class BaseScreen {	
 	
-	public static final float screenw = 720;
-	public static final float screenh = 1280;
-
-	private static MyGame game;
-
-	public static Stage stage;
+	protected static final float screenw = 500;
+	protected static final float screenh = 800;
 
 	protected static Skin skin;
+	protected static Stage stage;
+	protected static MyGame game;
+	protected static AssetManager am;
 	protected static Resolver resolver;
 	
-	public static First first;
+	protected static First first;
 
 	protected BaseScreen previousScreen;
 	protected Table root;
@@ -80,23 +78,5 @@ public class BaseScreen {
 	
 	public void onBackPressed(){
 		exitAnimation(previousScreen);
-	}
-
-	public static void initStatics(MyGame myGame, Resolver res){
-		skin = new Skin(Gdx.files.internal("data/skin/holo-dark-xhdpi.json"));		
-		stage = new Stage(screenw, screenh, true, null);	
-		Gdx.input.setInputProcessor(stage);
-		resolver = res;
-		game = myGame;
-		first = new First();
-		first.create();
-	}
-
-	public static void disposeStatics(){
-		stage.dispose();
-		first.dispose();
-		stage = null;
-		game = null;
-		resolver = null;
 	}
 }

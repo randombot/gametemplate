@@ -7,29 +7,29 @@ import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 public class First extends BaseScreen {
 
 	private Dialog exitDialog;
-	
+
 	@Override
 	public void create() {
 		super.create();
+
+		final float DEFAULT_DIALOG_PADDING_BOTTON_TOP = 20f;
 		exitDialog = new Dialog("¿Salir?", skin, "dialog") {
 			protected void result(Object object) {
 				if ((Boolean) object) {
 					Gdx.app.exit();
-				} else {
-					exitDialog.setVisible(false);
 				}
 			}
-		}.text("¿Estás seguro?").button("¡No!", false)
+		}.text("¿Estás seguro?")
+		.button("¡No!", false).key(Keys.BACK, false).key(Keys.BACKSPACE, false)
 		.button("Salir", true).key(Keys.ENTER, true);
 		exitDialog.setMovable(false);
-		exitDialog.setVisible(false);	
+		exitDialog.padLeft(DEFAULT_DIALOG_PADDING_BOTTON_TOP);
+		exitDialog.padRight(DEFAULT_DIALOG_PADDING_BOTTON_TOP);
 	}
 
 	@Override
 	public void onBackPressed() {
-		if(!exitDialog.isVisible()){
-			exitDialog.setVisible(true);
-			exitDialog.show(stage);		
-		}
+		if(exitDialog.getParent() != null) return;
+		exitDialog.show(stage);		
 	}	
 }

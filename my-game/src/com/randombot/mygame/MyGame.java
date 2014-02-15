@@ -2,18 +2,16 @@ package com.randombot.mygame;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.randombot.mygame.screens.BaseScreen;
+import com.randombot.mygame.screens.ScreenManager;
 
 public class MyGame implements ApplicationListener {
 	
-	private BaseScreen showingScreen;
+	public BaseScreen showingScreen;
 	private Resolver resolver;
+	private ScreenManager screenManager;
 	
 	public MyGame(Resolver res){
 		this.resolver = res;
@@ -21,31 +19,14 @@ public class MyGame implements ApplicationListener {
 	
 	@Override
 	public void create() {
-		BaseScreen.initStatics(this, this.resolver);
-		BaseScreen.stage.getRoot().addCaptureListener(new InputListener() {			
-			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				if (!(event.getTarget() instanceof TextField)) {
-					BaseScreen.stage.setKeyboardFocus(null);
-					Gdx.input.setOnscreenKeyboardVisible(false);
-				}
-				return false;
-			}			
-			@Override
-			public boolean keyDown(InputEvent event, int keycode) {
-				if(keycode == Keys.BACK || (keycode == Keys.BACKSPACE && !(event.getTarget() instanceof TextField))){					
-					MyGame.this.showingScreen.onBackPressed();
-					return true;
-				}
-				return false;
-			}
-		});
-		this.showingScreen = BaseScreen.first;
-		this.showingScreen.show();
+		this.screenManager = new ScreenManager(this, this.resolver);
+		this.showingScreen = this.screenManager;
+		this.showingScreen.create();
 	}
 
 	@Override
 	public void dispose() {
-		BaseScreen.disposeStatics();
+		this.screenManager.dispose();
 		System.exit(0);
 	}
 
@@ -56,7 +37,7 @@ public class MyGame implements ApplicationListener {
 
 	@Override
 	public void resize(int width, int height) {
-		BaseScreen.stage.setViewport(BaseScreen.screenw, BaseScreen.screenh, true);
+		this.screenManager.resize();
 	}
 
 	@Override
@@ -85,8 +66,7 @@ public class MyGame implements ApplicationListener {
 		new LwjglApplication(new MyGame(new DesktopResolver()), cfg);
 	}
 	
-	private static class DesktopResolver implements Resolver {
-		
+	private static class DesktopResolver implements Resolver {		
 		@Override
 		public void resolve(int which, int ... args) {
 			System.out.println("Resolve: " + which);
