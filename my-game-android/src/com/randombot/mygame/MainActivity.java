@@ -1,5 +1,6 @@
 package com.randombot.mygame;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -18,6 +19,7 @@ public class MainActivity extends AndroidApplication {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
 		// Create the layout
 		RelativeLayout layout = new RelativeLayout(this);
 
@@ -41,9 +43,14 @@ public class MainActivity extends AndroidApplication {
 		adView = new AdView(this);
 		adView.setAdUnitId(getResources().getString(R.string.ad_unit_id));
 		adView.setAdSize(AdSize.BANNER);
-		adView.setVisibility(View.VISIBLE);
 		adView.loadAd(new AdRequest.Builder().build());
-
+		/**
+		 * Invoking { requestWindowFeature(Window.FEATURE_NO_TITLE); } will make the add view
+		 * not to be shown until the next event (updating the ad every 60 seconds or pause/resume)
+		 * By calling setBackgroundColor we force the add to show itself as soon as it's loaded.
+		 */
+		adView.setBackgroundColor(Color.BLACK);
+		
 		// Add the libgdx view
 		layout.addView(gameView);
 
@@ -53,13 +60,11 @@ public class MainActivity extends AndroidApplication {
 						RelativeLayout.LayoutParams.WRAP_CONTENT);
 		adParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
 		adParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
-		adParams.addRule(RelativeLayout.VISIBLE);
 
 		layout.addView(adView, adParams);
-		layout.bringToFront();
 
 		// Hook it all up		
-		setContentView(layout);
+		setContentView(layout);		
 	}
 
 	@Override
