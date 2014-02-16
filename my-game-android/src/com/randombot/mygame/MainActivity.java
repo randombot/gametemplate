@@ -1,6 +1,9 @@
 package com.randombot.mygame;
 
+import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -13,13 +16,24 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 
-public class MainActivity extends AndroidApplication {
+public class MainActivity extends AndroidApplication implements Resolver{
 	
 	private AdView adView;
+		
+	private String facebook;
+	private String twitter;
+	private String appName;
+	private String googlePlay;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		final Resources res = getResources();		
+		this.facebook = res.getString(R.string.facebook);
+		this.twitter = res.getString(R.string.twitter);
+		this.appName = res.getString(R.string.app_name);
+		this.googlePlay = res.getString(R.string.google_play);
 		
 		// Create the layout
 		RelativeLayout layout = new RelativeLayout(this);
@@ -39,18 +53,18 @@ public class MainActivity extends AndroidApplication {
 		cfg.useGLSurfaceViewAPI18 = false;
 		cfg.useImmersiveMode = true;
 		cfg.useWakelock = false;
-		View gameView = initializeForView(new MyGame(new AndroidResolver()), cfg);
+		View gameView = initializeForView(new MyGame(this), cfg);
 
-		adView = new AdView(this);
-		adView.setAdUnitId(getResources().getString(R.string.ad_unit_id));
-		adView.setAdSize(AdSize.BANNER);
-		adView.loadAd(new AdRequest.Builder().build());
+		this.adView = new AdView(this);
+		this.adView.setAdUnitId(res.getString(R.string.ad_unit_id));
+		this.adView.setAdSize(AdSize.BANNER);
+		this.adView.loadAd(new AdRequest.Builder().build());
 		/**
 		 * Invoking { requestWindowFeature(Window.FEATURE_NO_TITLE); } will make the add view
 		 * not to be shown until the next event (updating the ad every 60 seconds or pause/resume)
 		 * By calling setBackgroundColor we force the add to show itself as soon as it's loaded.
 		 */
-		adView.setBackgroundColor(Color.BLACK);
+		this.adView.setBackgroundColor(Color.BLACK);
 		
 		// Add the libgdx view
 		layout.addView(gameView);
@@ -62,10 +76,10 @@ public class MainActivity extends AndroidApplication {
 		adParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
 		adParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
 
-		layout.addView(adView, adParams);
+		layout.addView(this.adView, adParams);
 
 		// Hook it all up		
-		setContentView(layout);		
+		setContentView(layout);	
 	}
 
 	@Override
@@ -86,29 +100,34 @@ public class MainActivity extends AndroidApplication {
 		super.onDestroy();
 	}
 
-	private class AndroidResolver implements Resolver {
-
-		@Override
-		public void resolve(int which, int ... args) {			
-			switch (which){
-			case SWARM: {
-
-				break;
-			}
-			case SHARE: {
-
-				break;
-			}
-			case SHOW_URI: {
-
-				break;
-			}
-			default: break;
-			}
-		}  		
-
-	}
-
 	@Override
 	public void onBackPressed() { }
+
+	@Override
+	public void resolve(int which, int... args) {
+		switch (which){
+		case SWARM: {
+
+			break;
+		}
+		case SHARE: {
+			Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND); 
+		    sharingIntent.setType("text/plain");
+		    String shareBody = "Let's play " + this.appName + "!\n" + this.googlePlay;
+		    sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+		    startActivity(Intent.createChooser(sharingIntent, "Share via"));
+			break;
+		}
+		case SHOW_URI: {
+			Uri myUri = Uri.parse(args[0] == SHOW_URI_FACEBOOK ? 
+					MainActivity.this.facebook : 
+					MainActivity.this.twitter);
+			Intent intent = new Intent(Intent.ACTION_VIEW, myUri);
+			intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+			startActivity(intent);
+			break;
+		}
+		default: break;
+		}
+	}
 }

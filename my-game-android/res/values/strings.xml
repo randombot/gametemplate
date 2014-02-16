@@ -2,4 +2,7 @@
 <resources>
     <string name="app_name">My Game</string>
     <string name="ad_unit_id">a151e6a437e0dd0</string>
+    <string name="facebook">https://www.facebook.com/pages/Random-Bot/254928944622296</string>
+    <string name="twitter">https://twitter.com/randombot_games</string>
+    <string name="google_play">GOOGLE_PLAY_URL_HERE</string>
 </resources>
