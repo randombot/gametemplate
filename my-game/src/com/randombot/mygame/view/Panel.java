@@ -21,31 +21,34 @@ import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
  */
 public class Panel extends Table {
 
-	private static float FADE_DURATION = .4f;
 	private static final String STAGE_BACKGROUND_DEFAULT_DRAWABLE = "dialogDimMediumAlpha";
 	
 	private Vector2 temp;
 	private boolean isModal;
 	private Drawable stageBackground;
-	private boolean hideOnOutterTouch;
+	private boolean hideOnExternalTouch;
+	
+	/**
+	 * Change this value to 0 if you want no animation.
+	 */
+	protected float FADE_DURATION = .4f;
 
 	public Panel(Skin skin) {
 		super(skin);
 		setBackground("blueBlackMedium");
-		this.stageBackground = skin.getDrawable(STAGE_BACKGROUND_DEFAULT_DRAWABLE);
-		initialize();
+		initialize(skin);
 	}
 	
 	public Panel(Skin skin, String drawableName) {
 		super(skin);
 		setBackground(drawableName);
-		this.stageBackground = skin.getDrawable(STAGE_BACKGROUND_DEFAULT_DRAWABLE);
-		initialize();
+		initialize(skin);
 	}
 	
-	private void initialize(){
+	private void initialize(Skin skin){
+		this.stageBackground = skin.getDrawable(STAGE_BACKGROUND_DEFAULT_DRAWABLE);
 		this.temp = new Vector2();
-		hideOnOutterTouch = true;
+		hideOnExternalTouch = true;
 		isModal = true;
 		setTouchable(Touchable.enabled);
 
@@ -55,10 +58,10 @@ public class Panel extends Table {
 			@Override
 			public boolean touchDown(InputEvent event, float x, float y,
 					int pointer, int button) {
+				if (!hideOnExternalTouch) return isModal;
 				localToStageCoordinates(/* in/out */temp.set(x, y));
 				rtmp.set(getX(), getY(), getWidth(), getHeight());
 				if (!rtmp.contains(temp.x, temp.y)) {
-					if (hideOnOutterTouch)
 						hide();
 				}
 				return isModal;
@@ -136,14 +139,14 @@ public class Panel extends Table {
 	}
 	
 	public void setHideOnOutterTouch(boolean hideOnOutterTouch) {
-		this.hideOnOutterTouch = hideOnOutterTouch;
+		this.hideOnExternalTouch = hideOnOutterTouch;
 	}	
 	
 	public void setStageBackground(Drawable stageBackground) {
 		this.stageBackground = stageBackground;
 	}
 
-	private final Runnable hideRunnable = new Runnable() {
+	protected final Runnable hideRunnable = new Runnable() {
 		@Override
 		public void run() {
 			setVisible(false);
