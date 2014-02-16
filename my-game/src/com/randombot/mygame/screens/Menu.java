@@ -48,15 +48,19 @@ public class Menu extends BaseScreen {
 		stuff.defaults().expand().space(DEFAULT_DIALOG_PADDING_BOTTON_TOP*.5f);
 		stuff.pad(DEFAULT_DIALOG_PADDING_BOTTON_TOP);
 
-		stuff.add(logo).colspan(2);
+		stuff.add(logo).colspan(2).padRight(60f).padLeft(60f).padTop(60f);
 		stuff.row();
-		stuff.add(play).colspan(2);
+		stuff.add(play).colspan(2).fill().expand().padRight(100f).padLeft(100f).padTop(100f);
+		
+		Table miniTable = new Table();
+		miniTable.add(music);
+		miniTable.add(sound);
+		miniTable.row();
+		miniTable.add(help);
+		miniTable.add(credits);
+
 		stuff.row();
-		stuff.add(help);
-		stuff.add(credits);
-		stuff.row();
-		stuff.add(music);
-		stuff.add(sound);
+		stuff.add(miniTable);
 		
 		root.addActor(stuff);
 	}
