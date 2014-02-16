@@ -2,19 +2,20 @@ package com.randombot.mygame.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Scaling;
 import com.randombot.mygame.view.MenuButton;
 
 public class Menu extends BaseScreen {
 
 	private Dialog exitDialog;
-	private Image logo;
-	private Button play, help, credits, music, sound;
-	
+
 	@Override
 	public void create() {
 		super.create();
@@ -33,16 +34,17 @@ public class Menu extends BaseScreen {
 		exitDialog.setMovable(false);
 		exitDialog.padLeft(DEFAULT_DIALOG_PADDING_BOTTON_TOP);
 		exitDialog.padRight(DEFAULT_DIALOG_PADDING_BOTTON_TOP);		
-		
-		logo = new Image(skin, "ic_logo");
+
+		Image logo = new Image(skin, "ic_logo");
 		logo.setScaling(Scaling.fit);
-		
+
+		final Button play, help, credits, music, sound;
 		play = new MenuButton("Play", skin, "ic_playgame");
 		help = new MenuButton("Help", skin, "icon-blitz");
 		credits = new MenuButton("Credits", skin, "icon-blitz");
 		music = new MenuButton("Music", skin, "icon-blitz");
 		sound = new MenuButton("Sound",skin, "icon-blitz");
-		
+
 		Table stuff = new Table();
 		stuff.setFillParent(true);
 		stuff.defaults().expand().space(DEFAULT_DIALOG_PADDING_BOTTON_TOP*.5f);
@@ -51,7 +53,7 @@ public class Menu extends BaseScreen {
 		stuff.add(logo).colspan(2).padRight(60f).padLeft(60f).padTop(60f);
 		stuff.row();
 		stuff.add(play).colspan(2).fill().expand().padRight(100f).padLeft(100f).padTop(100f);
-		
+
 		Table miniTable = new Table();
 		miniTable.add(music);
 		miniTable.add(sound);
@@ -61,13 +63,61 @@ public class Menu extends BaseScreen {
 
 		stuff.row();
 		stuff.add(miniTable);
-		
+
 		root.addActor(stuff);
+
+		// Creating the transition listener
+		ClickListener mTransitionListener = new ClickListener() {
+
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				final BaseScreen next = getNextScreen(event.getListenerActor());
+				if (next == null) {
+					return;
+				}
+				exitAnimation(next);
+			}
+
+			private BaseScreen getNextScreen(Actor target) {
+				BaseScreen next = null;
+				if (target == play) {
+					next = Menu.play;
+				} else if (target == help) {
+					next = Menu.help;
+				} else if (target == credits) {
+					next = Menu.credits;
+				}
+				return next;
+			}
+		};
+		play.addListener(mTransitionListener);
+		help.addListener(mTransitionListener);
+		credits.addListener(mTransitionListener);
+
+		// Creating the music/sound listener
+		ClickListener mMultimediaListener = new ClickListener() {
+
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				final Actor target = event.getListenerActor();
+				if (target == music) {
+					System.out.println("Change music state");
+				} else if (target == sound) {
+					System.out.println("Change sound state");
+				}
+			}
+		};
+		music.addListener(mMultimediaListener);
+		sound.addListener(mMultimediaListener);
 	}
 
 	@Override
 	public void onBackPressed() {
-		if(exitDialog.getParent() != null) return;
+		if(!isVisibleDialog()) return;
 		exitDialog.show(stage);		
 	}		
+	
+	private boolean isVisibleDialog(){
+		return exitDialog.getParent() == null;
+	}
 }

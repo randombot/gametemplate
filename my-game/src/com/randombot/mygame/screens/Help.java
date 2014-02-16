@@ -32,9 +32,18 @@ public class Help extends BaseScreen {
 	@Override
 	public void show() {
 		super.show();
-
-		if(rate.getParent() != null) return;
+		if(!isVisibleDialog()) return;
 		rate.show(stage);		
 	}
 	
+	@Override
+	public void onBackPressed() {
+		if(!isVisibleDialog()) return;
+		super.onBackPressed();
+	}
+	
+	private boolean isVisibleDialog(){
+		return rate.getParent() == null;
+	}
+		
 }
