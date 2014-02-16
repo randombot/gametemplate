@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Scaling;
 import com.randombot.mygame.view.MenuButton;
@@ -36,32 +37,33 @@ public class Menu extends BaseScreen {
 		logo.setScaling(Scaling.fit);
 
 		final Button play, help, credits, music, sound;
-		play = new MenuButton("Play", skin, "ic_playgame");
-		help = new MenuButton("Help", skin, "icon-blitz");
-		credits = new MenuButton("Credits", skin, "icon-blitz");
-		music = new MenuButton("Music", skin, "icon-blitz");
-		sound = new MenuButton("Sound",skin, "icon-blitz");
+		play = new TextButton("Play", skin);
+		help = new TextButton("Help", skin);
+		credits = new TextButton("Credits", skin);
+		music = new TextButton("Music", skin, "toggle");
+		sound = new TextButton("Sound", skin, "toggle");
 
-		Table stuff = new Table();
-		stuff.setFillParent(true);
-		stuff.defaults().expand().space(DEFAULT_DIALOG_PADDING_BOTTON_TOP*.5f);
-		stuff.pad(DEFAULT_DIALOG_PADDING_BOTTON_TOP);
+		Table stuffTable = new Table();
+		stuffTable.setFillParent(true);
+		stuffTable.defaults().expand().space(DEFAULT_DIALOG_PADDING_BOTTON_TOP*.5f);
+		stuffTable.pad(DEFAULT_DIALOG_PADDING_BOTTON_TOP);
 
-		stuff.add(logo).colspan(2).padRight(60f).padLeft(60f).padTop(60f);
-		stuff.row();
-		stuff.add(play).colspan(2).fill().expand().padRight(100f).padLeft(100f).padTop(100f);
-
+		stuffTable.add(logo).colspan(2).padRight(60f).padLeft(60f).padTop(60f);
+		stuffTable.row();
+		stuffTable.add(play).colspan(2).fill().expand().padRight(100f).padLeft(100f).padTop(100f);		
+		stuffTable.row();
+		
 		Table miniTable = new Table();
+		miniTable.pad(50f);
+		miniTable.defaults().fill().expand().uniform().space(50f);
 		miniTable.add(music);
 		miniTable.add(sound);
 		miniTable.row();
 		miniTable.add(help);
-		miniTable.add(credits);
+		miniTable.add(credits);		
+		stuffTable.add(miniTable).expand().fill();
 
-		stuff.row();
-		stuff.add(miniTable);
-
-		root.addActor(stuff);
+		root.addActor(stuffTable);
 
 		// Creating the transition listener
 		ClickListener mTransitionListener = new ClickListener() {

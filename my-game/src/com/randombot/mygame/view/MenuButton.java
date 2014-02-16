@@ -29,7 +29,7 @@ public class MenuButton extends Button {
 		scene.setAlignment(Align.center);
 
 		pad(PAD_TOP, PAD_LEFT, PAD_BOTTOM, PAD_RIGHT);
-		add(sceneIcon).expand();
+		add(sceneIcon).expand().fill();
 		row();
 		add(scene).width(getPrefWidth());
 		//pack();
