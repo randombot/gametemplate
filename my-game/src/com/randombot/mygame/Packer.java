@@ -114,8 +114,8 @@ public class Packer {
 		set.pot = false;
 		set.maxHeight = 1024;
 		set.maxWidth = 1024;
-		set.paddingX = 1;
-		set.paddingY = 1;		
+		set.paddingX = 2;
+		set.paddingY = 2;		
 
 		System.out.println("TexturePacker");
 		try {

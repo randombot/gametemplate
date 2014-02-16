@@ -2,17 +2,18 @@ package com.randombot.mygame.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Scaling;
+import com.randombot.mygame.view.MenuButton;
 
 public class Menu extends BaseScreen {
 
 	private Dialog exitDialog;
 	private Image logo;
-	private ImageButton play, help, credits, music, sound;
+	private Button play, help, credits, music, sound;
 	
 	@Override
 	public void create() {
@@ -36,27 +37,25 @@ public class Menu extends BaseScreen {
 		logo = new Image(skin, "ic_logo");
 		logo.setScaling(Scaling.fit);
 		
-		play = new ImageButton(skin, "ic_playgame");
-		help = new ImageButton(skin, "icon-blitz");
-		credits = new ImageButton(skin, "icon-blitz");
-		music = new ImageButton(skin, "icon-blitz");
-		sound = new ImageButton(skin, "icon-blitz");
+		play = new MenuButton("Play", skin, "ic_playgame");
+		help = new MenuButton("Help", skin, "icon-blitz");
+		credits = new MenuButton("Credits", skin, "icon-blitz");
+		music = new MenuButton("Music", skin, "icon-blitz");
+		sound = new MenuButton("Sound",skin, "icon-blitz");
 		
 		Table stuff = new Table();
 		stuff.setFillParent(true);
-		stuff.defaults().expand().space(DEFAULT_DIALOG_PADDING_BOTTON_TOP);
+		stuff.defaults().expand().space(DEFAULT_DIALOG_PADDING_BOTTON_TOP*.5f);
 		stuff.pad(DEFAULT_DIALOG_PADDING_BOTTON_TOP);
 
-		stuff.add(logo);
+		stuff.add(logo).colspan(2);
 		stuff.row();
-		stuff.add(play);
+		stuff.add(play).colspan(2);
 		stuff.row();
 		stuff.add(help);
-		stuff.row();
 		stuff.add(credits);
 		stuff.row();
 		stuff.add(music);
-		stuff.row();
 		stuff.add(sound);
 		
 		root.addActor(stuff);
