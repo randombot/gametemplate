@@ -104,7 +104,7 @@ public class MainActivity extends AndroidApplication implements Resolver{
 	public void onBackPressed() { }
 
 	@Override
-	public void resolve(int which, int... args) {
+	public void resolve(int which, int arg) {
 		switch (which){
 		case SWARM: {
 
@@ -119,7 +119,7 @@ public class MainActivity extends AndroidApplication implements Resolver{
 			break;
 		}
 		case SHOW_URI: {
-			Uri myUri = Uri.parse(args[0] == SHOW_URI_FACEBOOK ? 
+			Uri myUri = Uri.parse(arg == SHOW_URI_FACEBOOK ? 
 					MainActivity.this.facebook : 
 					MainActivity.this.twitter);
 			Intent intent = new Intent(Intent.ACTION_VIEW, myUri);

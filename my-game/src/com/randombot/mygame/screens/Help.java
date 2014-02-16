@@ -16,14 +16,13 @@ public class Help extends BaseScreen {
 		rate = new ModalDialog("Rating", skin) {
 			protected void result(Object object) {
 				if ((Boolean) object) {
-					resolver.resolve(Resolver.SHARE);
+					resolver.resolve(Resolver.SHARE, 0);
 				}
 			}
 		};
 		rate.text("Rate this game!")
 		.button("No!", false).key(Keys.BACK, false).key(Keys.BACKSPACE, false)
-		.button("Yes", true).key(Keys.ENTER, true);
-		
+		.button("Yes", true).key(Keys.ENTER, true);		
 	}
 	
 	@Override

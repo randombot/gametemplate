@@ -72,7 +72,7 @@ public class MyGame implements ApplicationListener {
 	
 	private static class DesktopResolver implements Resolver {		
 		@Override
-		public void resolve(int which, int ... args) {
+		public void resolve(int which, int arg) {
 			System.out.println("Resolve: " + which);
 		}
 	}
