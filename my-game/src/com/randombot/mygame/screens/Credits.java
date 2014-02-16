@@ -31,7 +31,7 @@ public class Credits extends BaseScreen {
 		
 		Table stuffTable = new Table();
 		stuffTable.setFillParent(true);
-		stuffTable.defaults().expand().space(30f);
+		stuffTable.defaults().expand().space(15f);
 		stuffTable.pad(60f);
 		
 		final Button rblogo, twitter, fb, market;

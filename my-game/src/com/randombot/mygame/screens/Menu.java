@@ -20,7 +20,6 @@ public class Menu extends BaseScreen {
 	public void create() {
 		super.create();
 
-		final float DEFAULT_DIALOG_PADDING_BOTTON_TOP = 10f;
 		exitDialog = new ModalDialog("Exit", skin) {
 			protected void result(Object object) {
 				if ((Boolean) object) {
@@ -44,8 +43,8 @@ public class Menu extends BaseScreen {
 
 		Table stuffTable = new Table();
 		stuffTable.setFillParent(true);
-		stuffTable.defaults().expand().space(DEFAULT_DIALOG_PADDING_BOTTON_TOP*.5f);
-		stuffTable.pad(DEFAULT_DIALOG_PADDING_BOTTON_TOP);
+		stuffTable.defaults().expand().space(5f);
+		stuffTable.pad(10f);
 
 		stuffTable.add(logo).colspan(2).padRight(60f).padLeft(60f).padTop(60f);
 		stuffTable.row();
