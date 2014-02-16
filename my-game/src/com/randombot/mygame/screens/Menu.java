@@ -55,11 +55,11 @@ public class Menu extends BaseScreen {
 		Table miniTable = new Table();
 		miniTable.pad(50f);
 		miniTable.defaults().fill().expand().uniform().space(50f);
-		miniTable.add(music);
-		miniTable.add(sound);
-		miniTable.row();
 		miniTable.add(help);
-		miniTable.add(credits);		
+		miniTable.add(credits);	
+		miniTable.row();
+		miniTable.add(music);
+		miniTable.add(sound);	
 		stuffTable.add(miniTable).expand().fill();
 
 		root.addActor(stuffTable);

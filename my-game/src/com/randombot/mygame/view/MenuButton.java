@@ -25,7 +25,7 @@ public class MenuButton extends Button {
 		sceneIcon.setScaling(Scaling.fit);
 
 		Label scene = new Label(name, skin);
-		scene.setWrap(true);
+		//scene.setWrap(true);
 		scene.setAlignment(Align.center);
 
 		pad(PAD_TOP, PAD_LEFT, PAD_BOTTOM, PAD_RIGHT);
