@@ -4,10 +4,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.math.Interpolation;
-import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.randombot.mygame.MyGame;
 import com.randombot.mygame.Resolver;
 
@@ -28,12 +28,12 @@ public class BaseScreen {
 	protected static Play play;
 
 	protected BaseScreen previousScreen;
-	protected Group root;
+	protected Table root;
 
 	protected void setUpRoot(){
-		root = new Group();
+		root = new Table(skin);
 		root.setVisible(false);
-		root.setBounds(0, 0, stage.getWidth(), stage.getHeight());
+		root.setFillParent(true);
 		stage.addActor(root);
 	}
 	
