@@ -5,40 +5,32 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Scaling;
 import com.randombot.mygame.view.MenuButton;
+import com.randombot.mygame.view.ModalDialog;
 
 public class Menu extends BaseScreen {
 
-	private Dialog exitDialog;
+	private ModalDialog exitDialog;
 
 	@Override
 	public void create() {
 		super.create();
 
 		final float DEFAULT_DIALOG_PADDING_BOTTON_TOP = 10f;
-		exitDialog = new Dialog("Exit", skin, "exit-dialog") {
+		exitDialog = new ModalDialog("Exit", skin) {
 			protected void result(Object object) {
 				if ((Boolean) object) {
 					Gdx.app.exit();
 				}
 			}
 		};
-		exitDialog.getButtonTable()
-		.defaults()
-		.space(DEFAULT_DIALOG_PADDING_BOTTON_TOP)
-		.width(DEFAULT_DIALOG_PADDING_BOTTON_TOP*15f);
 		exitDialog.text("Are you sure?")
-		.button("No!", false).key(Keys.BACK, false).key(Keys.BACKSPACE, false)
-		.button("Yes", true).key(Keys.ENTER, true);
-		exitDialog.setMovable(false);
-		exitDialog.padLeft(DEFAULT_DIALOG_PADDING_BOTTON_TOP);
-		exitDialog.padRight(DEFAULT_DIALOG_PADDING_BOTTON_TOP);	
-		exitDialog.padBottom(DEFAULT_DIALOG_PADDING_BOTTON_TOP);
+		.button("EXIT", true).key(Keys.ENTER, true)
+		.button("Keep playing", false).key(Keys.BACK, false).key(Keys.BACKSPACE, false);
 
 		Image logo = new Image(skin, "ic_logo");
 		logo.setScaling(Scaling.fit);
@@ -118,11 +110,8 @@ public class Menu extends BaseScreen {
 
 	@Override
 	public void onBackPressed() {
-		if(!isVisibleDialog()) return;
+		if(exitDialog.isVisible()) return;
 		exitDialog.show(stage);		
 	}		
-	
-	private boolean isVisibleDialog(){
-		return exitDialog.getParent() == null;
-	}
+
 }
