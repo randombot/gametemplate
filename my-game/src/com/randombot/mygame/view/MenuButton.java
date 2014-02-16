@@ -8,7 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.utils.Scaling;
 
 /**
- * A button displayed in the MainMenu and PanelMenu Screens.
+ * A button displayed in the MainMenu Screen and maybe others.
  */
 public class MenuButton extends Button {
 

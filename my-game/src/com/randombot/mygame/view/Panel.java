@@ -15,24 +15,38 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 
-
 /**
  * Panel is a generic lightweight container with methods show and hide. Sizes
- * and positions children using table constraint.
+ * and positions children using table constraints.
  */
 public class Panel extends Table {
 
-	private float FADE_DURATION = .4f;
-	private Drawable stageBackground;
+	private static float FADE_DURATION = .4f;
+	private static final String STAGE_BACKGROUND_DEFAULT_DRAWABLE = "dialogDimMediumAlpha";
+	
 	private Vector2 temp;
 	private boolean isModal;
+	private Drawable stageBackground;
 	private boolean hideOnOutterTouch;
 
+	public Panel(Skin skin) {
+		super(skin);
+		setBackground("blueBlackMedium");
+		this.stageBackground = skin.getDrawable(STAGE_BACKGROUND_DEFAULT_DRAWABLE);
+		initialize();
+	}
+	
 	public Panel(Skin skin, String drawableName) {
 		super(skin);
+		setBackground(drawableName);
+		this.stageBackground = skin.getDrawable(STAGE_BACKGROUND_DEFAULT_DRAWABLE);
+		initialize();
+	}
+	
+	private void initialize(){
 		this.temp = new Vector2();
 		hideOnOutterTouch = true;
-		setBackground(drawableName);
+		isModal = true;
 		setTouchable(Touchable.enabled);
 
 		addListener(new InputListener() {
@@ -76,6 +90,7 @@ public class Panel extends Table {
 	public void show() {
 		setVisible(true);
 		if (FADE_DURATION > 0) {
+			getColor().a = 0f;
 			addAction(Actions.fadeIn(FADE_DURATION, Interpolation.fade));
 		}
 	}
@@ -106,7 +121,7 @@ public class Panel extends Table {
 	
 	public Actor hit(float x, float y, boolean touchable) {
 		Actor hit = super.hit(x, y, touchable);
-		if ((hit == null && (!touchable || getTouchable() == Touchable.enabled))) {
+		if ((hit == null && isModal && (!touchable || getTouchable() == Touchable.enabled))) {
 			return this;
 		}
 		return hit;
@@ -123,6 +138,10 @@ public class Panel extends Table {
 	public void setHideOnOutterTouch(boolean hideOnOutterTouch) {
 		this.hideOnOutterTouch = hideOnOutterTouch;
 	}	
+	
+	public void setStageBackground(Drawable stageBackground) {
+		this.stageBackground = stageBackground;
+	}
 
 	private final Runnable hideRunnable = new Runnable() {
 		@Override
