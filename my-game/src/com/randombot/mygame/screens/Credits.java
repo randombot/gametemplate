@@ -2,7 +2,6 @@ package com.randombot.mygame.screens;
 
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.randombot.mygame.Resolver;
 import com.randombot.mygame.view.MenuButton;
@@ -12,7 +11,6 @@ public class Credits extends BaseScreen {
 	
 	private ModalDialog rate;
 	
-
 	@Override
 	public void create() {
 		super.create();
@@ -29,28 +27,23 @@ public class Credits extends BaseScreen {
 		.button("No!", false).key(Keys.BACK, false).key(Keys.BACKSPACE, false)
 		.button("Yes", true).key(Keys.ENTER, true);	
 		
-		Table stuffTable = new Table();
-		stuffTable.setFillParent(true);
-		stuffTable.defaults().expand().space(15f);
-		stuffTable.pad(60f);
+		root.defaults().expand().space(15f);
+		root.pad(60f);
 		
 		final Button rblogo, twitter, fb, market;
 		
 		rblogo = new MenuButton("Daniel Nowendsztern\nDan Cristian Rotaru", skin, "icon-blitz");
-		stuffTable.add(rblogo).colspan(3).fill();
+		root.add(rblogo).colspan(3).fill();
 		
-		stuffTable.row();
+		root.row();
 		twitter = new TextButton("Twitter", skin);
-		stuffTable.add(twitter);
+		root.add(twitter);
 		
 		market = new TextButton("Market", skin);
-		stuffTable.add(market);
+		root.add(market);
 		
 		fb = new TextButton("Facebook", skin);
-		stuffTable.add(fb);
-		
-		root.addActor(stuffTable);
-		
+		root.add(fb);
 	}
 	
 	@Override

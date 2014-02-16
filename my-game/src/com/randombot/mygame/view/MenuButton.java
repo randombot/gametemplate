@@ -14,6 +14,7 @@ public class MenuButton extends Button {
 
 	private final float PAD_TOP = 17f, PAD_LEFT = 17f, PAD_BOTTOM = 10f,
 			PAD_RIGHT = 17f;
+	private Label scene;
 
 	public MenuButton(String name, Skin skin, String iconRegion) {
 		super(skin);
@@ -24,15 +25,15 @@ public class MenuButton extends Button {
 		Image sceneIcon = new Image(skin.getRegion(iconRegion));
 		sceneIcon.setScaling(Scaling.fit);
 
-		Label scene = new Label(name, skin);
-		//scene.setWrap(true);
+		scene = new Label(name, skin);
+		scene.setWrap(true);
 		scene.setAlignment(Align.center);
 
 		pad(PAD_TOP, PAD_LEFT, PAD_BOTTOM, PAD_RIGHT);
 		add(sceneIcon).expand().fill();
 		row();
-		add(scene).width(getPrefWidth());
-		//pack();
+		add(scene).fillX();
+		debug();
 	}
 
 	@Override

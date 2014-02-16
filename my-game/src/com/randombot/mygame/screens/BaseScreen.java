@@ -31,7 +31,7 @@ public class BaseScreen {
 	protected Table root;
 
 	protected void setUpRoot(){
-		root = new Table(skin);
+		root = new Table(skin).debug();
 		root.setVisible(false);
 		root.setFillParent(true);
 		stage.addActor(root);
@@ -58,6 +58,7 @@ public class BaseScreen {
 		clearColor();
 		stage.act(delta);
 		stage.draw();
+		Table.drawDebug(stage);
 	}
 
 	public void create() {

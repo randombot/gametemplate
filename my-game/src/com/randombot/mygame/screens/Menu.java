@@ -40,16 +40,6 @@ public class Menu extends BaseScreen {
 		credits = new TextButton("Credits", skin);
 		music = new TextButton("Music", skin, "toggle");
 		sound = new TextButton("Sound", skin, "toggle");
-
-		Table stuffTable = new Table();
-		stuffTable.setFillParent(true);
-		stuffTable.defaults().expand().space(5f);
-		stuffTable.pad(10f);
-
-		stuffTable.add(logo).colspan(2).padRight(60f).padLeft(60f).padTop(60f);
-		stuffTable.row();
-		stuffTable.add(play).colspan(2).fill().expand().padRight(100f).padLeft(100f).padTop(100f);		
-		stuffTable.row();
 		
 		Table miniTable = new Table();
 		miniTable.pad(50f);
@@ -59,9 +49,14 @@ public class Menu extends BaseScreen {
 		miniTable.row();
 		miniTable.add(music);
 		miniTable.add(sound);	
-		stuffTable.add(miniTable).expand().fill();
-
-		root.addActor(stuffTable);
+		
+		root.defaults().expand().space(5f);
+		root.pad(10f);
+		root.add(logo).colspan(2).padRight(60f).padLeft(60f).padTop(60f);
+		root.row();
+		root.add(play).colspan(2).fill().expand().padRight(100f).padLeft(100f).padTop(100f);		
+		root.row();
+		root.add(miniTable).expand().fill();
 
 		// Creating the transition listener
 		ClickListener mTransitionListener = new ClickListener() {
