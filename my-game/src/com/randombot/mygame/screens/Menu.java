@@ -20,20 +20,25 @@ public class Menu extends BaseScreen {
 	public void create() {
 		super.create();
 
-		final float DEFAULT_DIALOG_PADDING_BOTTON_TOP = 30f;
-		exitDialog = new Dialog("Exit", skin, "dialog") {
+		final float DEFAULT_DIALOG_PADDING_BOTTON_TOP = 10f;
+		exitDialog = new Dialog("Exit", skin, "exit-dialog") {
 			protected void result(Object object) {
 				if ((Boolean) object) {
 					Gdx.app.exit();
 				}
 			}
-		}
-		.text("Are you sure?")
+		};
+		exitDialog.getButtonTable()
+		.defaults()
+		.space(DEFAULT_DIALOG_PADDING_BOTTON_TOP)
+		.width(DEFAULT_DIALOG_PADDING_BOTTON_TOP*15f);
+		exitDialog.text("Are you sure?")
 		.button("No!", false).key(Keys.BACK, false).key(Keys.BACKSPACE, false)
 		.button("Yes", true).key(Keys.ENTER, true);
 		exitDialog.setMovable(false);
 		exitDialog.padLeft(DEFAULT_DIALOG_PADDING_BOTTON_TOP);
-		exitDialog.padRight(DEFAULT_DIALOG_PADDING_BOTTON_TOP);		
+		exitDialog.padRight(DEFAULT_DIALOG_PADDING_BOTTON_TOP);	
+		exitDialog.padBottom(DEFAULT_DIALOG_PADDING_BOTTON_TOP);
 
 		Image logo = new Image(skin, "ic_logo");
 		logo.setScaling(Scaling.fit);
