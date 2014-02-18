@@ -43,14 +43,14 @@ public class ScreenManager extends BaseScreen {
 		this.loadingProgress = new NinePatch(atlas.findRegion("3"), 4, 4, 4, 4);
 
 		stage = new Stage(screenw,screenh, true);
-		this.sb = stage.getSpriteBatch();		
+		this.sb = stage.getSpriteBatch();	
 
 		am = new AssetManager();
 		/*-QUEUE here loading assets-*/
-		am.load(SKIN_SRC, Skin.class);		
+		am.load(SKIN_SRC, Skin.class);	
 	}
 	
-	public void update() {
+	public void update(float delta) {
 		if (am.update()) {
 			Gdx.app.postRunnable(new Runnable(){
 				@Override
@@ -105,7 +105,7 @@ public class ScreenManager extends BaseScreen {
 		this.sb.end();
 	}
 
-	public void resize() { stage.setViewport(screenw, screenh, true); }
+	public void resize() { }
 	
 	@Override
 	public void hide() {
@@ -113,16 +113,5 @@ public class ScreenManager extends BaseScreen {
 	}
 	
 	@Override
-	public void dispose() {
-		stage.dispose();
-		menu.dispose();
-		help.dispose();
-		credits.dispose();
-		play.dispose();
-		am.dispose();
-		am = null;
-		stage = null;
-		game = null;
-		resolver = null;
-	}
+	public void dispose() {	}
 }

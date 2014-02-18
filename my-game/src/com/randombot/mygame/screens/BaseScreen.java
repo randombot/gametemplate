@@ -1,6 +1,7 @@
 package com.randombot.mygame.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.math.Interpolation;
@@ -54,8 +55,8 @@ public class BaseScreen {
 				})));
 	}
 
-	public void update() { 
-		stage.act();
+	public void update(float delta) { 
+		stage.act(delta);
 	}
 	
 	public void draw(){
@@ -76,6 +77,10 @@ public class BaseScreen {
 	public void hide() { 
 		root.setVisible(false);
 	}	
+	
+	public InputProcessor getInputProcessor(){
+		return stage;
+	}
 
 	public void pause() { }
 

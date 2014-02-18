@@ -1,6 +1,7 @@
 package com.randombot.mygame;
 
 import com.badlogic.gdx.ApplicationListener;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.randombot.mygame.screens.BaseScreen;
@@ -16,6 +17,8 @@ public class MyGame implements ApplicationListener {
 	private static final boolean PACKING = false;	
 	//////////////////////////////////////////////////////////////////////////////////////////
 	//// Comment added from iPad :)	
+	
+	////////////////TRANSITION//////////////
 
 	public MyGame(Resolver res){
 		this.resolver = res;
@@ -36,7 +39,7 @@ public class MyGame implements ApplicationListener {
 
 	@Override
 	public void render() {	
-		this.showingScreen.update();
+		this.showingScreen.update(Gdx.graphics.getDeltaTime());
 		this.showingScreen.draw();
 	}
 
