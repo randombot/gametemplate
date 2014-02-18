@@ -16,14 +16,16 @@ public class Slice implements Transition{
 	public static final int DOWN = 2;
 	public static final int UP_DOWN = 3;
 	private static final Slice instance = new Slice();
-	
+
+	private boolean horizontal = true;
 	private float duration;
 	private int direction;
 	private Interpolation easing;
 	private Array<Integer> sliceIndex = new Array<Integer>();
 
-	public static Slice init (float duration, int direction, int numSlices, Interpolation easing) {
+	public static Slice init (float duration, boolean horizontal, int direction, int numSlices, Interpolation easing) {
 		instance.duration = duration;
+		instance.horizontal = horizontal;
 		instance.direction = direction == RANDOM ? MathUtils.random(UP, UP_DOWN) : direction;;
 		instance.easing = easing;
 		// create shuffled list of slice indices which determines
@@ -51,34 +53,68 @@ public class Slice implements Transition{
 		float h = currScreen.getRegionHeight();
 		float x = 0;
 		float y = 0;
-		int nextScreenH = currScreen.getRegionHeight();
-		int sliceWidth = (int)(w / sliceIndex.size);
-		Texture nextTex = nextScreen.getTexture();
-		alpha = easing.apply(alpha);
-		for (int i = 0; i < sliceIndex.size; i++) {
-			// current slice/column
-			x = i * sliceWidth;
-			// vertical displacement using randomized
-			// list of slice indices
-			float offsetY = h * (1 + sliceIndex.get(i) / (float)sliceIndex.size);
-			switch (direction) {
-			case UP:
-				y = -offsetY + offsetY * alpha;
-				break;
-			case DOWN:
-				y = offsetY - offsetY * alpha;
-				break;
-			case UP_DOWN:
-				if (i % 2 == 0) {
-					y = -offsetY + offsetY * alpha;
-				} else {
-					y = offsetY - offsetY * alpha;
+
+		if(horizontal){
+			int nextScreenW = currScreen.getRegionWidth();
+			int sliceHeight = (int)(h / sliceIndex.size);
+			Texture nextTex = nextScreen.getTexture();
+			alpha = easing.apply(alpha);
+			for (int i = 0; i < sliceIndex.size; ++i) {
+				// current slice/column
+				y = i * sliceHeight;
+				// vertical displacement using randomized
+				// list of slice indices
+				float offsetX = w * (1 + sliceIndex.get(i) / (float)sliceIndex.size);
+				switch (direction) {
+				case UP:
+					x = -offsetX + offsetX * alpha;
+					break;
+				case DOWN:
+					x = offsetX - offsetX * alpha;
+					break;
+				case UP_DOWN:
+					if (i % 2 == 0) {
+						x = -offsetX + offsetX * alpha;
+					} else {
+						x = offsetX - offsetX * alpha;
+					}
+					break;
 				}
-				break;
+				batch.draw(nextTex, x, y, 0, 0, w, sliceHeight, 1, 1, 0,
+						0, i * sliceHeight, nextScreenW, sliceHeight,
+						false, true);
 			}
-			batch.draw(nextTex, x, y, 0, 0, sliceWidth, h, 1, 1, 0,
-					i * sliceWidth, 0, sliceWidth, nextScreenH,
-					false, true);
+		} else {
+
+			int nextScreenH = currScreen.getRegionHeight();
+			int sliceWidth = (int)(w / sliceIndex.size);
+			Texture nextTex = nextScreen.getTexture();
+			alpha = easing.apply(alpha);
+			for (int i = 0; i < sliceIndex.size; ++i) {
+				// current slice/column
+				x = i * sliceWidth;
+				// vertical displacement using randomized
+				// list of slice indices
+				float offsetY = h * (1 + sliceIndex.get(i) / (float)sliceIndex.size);
+				switch (direction) {
+				case UP:
+					y = -offsetY + offsetY * alpha;
+					break;
+				case DOWN:
+					y = offsetY - offsetY * alpha;
+					break;
+				case UP_DOWN:
+					if (i % 2 == 0) {
+						y = -offsetY + offsetY * alpha;
+					} else {
+						y = offsetY - offsetY * alpha;
+					}
+					break;
+				}
+				batch.draw(nextTex, x, y, 0, 0, sliceWidth, h, 1, 1, 0,
+						i * sliceWidth, 0, sliceWidth, nextScreenH,
+						false, true);
+			}
 		}
 		batch.end();
 	}

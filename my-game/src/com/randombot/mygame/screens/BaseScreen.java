@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -76,6 +77,6 @@ public class BaseScreen {
 	public void dispose() { }
 	
 	public void onBackPressed(){
-		game.changeScreen(previousScreen, Fade.init(1f, true));
+		game.changeScreen(previousScreen, Fade.init(1f, MathUtils.randomBoolean()));
 	}
 }

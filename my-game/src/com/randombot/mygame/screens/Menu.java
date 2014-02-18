@@ -3,6 +3,7 @@ package com.randombot.mygame.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.math.Interpolation;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
@@ -70,7 +71,7 @@ public class Menu extends BaseScreen {
 				if (next == null) {
 					return;
 				}
-				game.changeScreen(next, Slice.init(1f, Slice.RANDOM, 10, Interpolation.sineOut));
+				game.changeScreen(next, Slice.init(1f, MathUtils.randomBoolean(), Slice.RANDOM, 10, Interpolation.sineOut));
 			}
 
 			private BaseScreen getNextScreen(Actor target) {
