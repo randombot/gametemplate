@@ -1,7 +1,6 @@
 package com.randombot.mygame;
 
 import com.badlogic.gdx.ApplicationListener;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.randombot.mygame.screens.BaseScreen;
@@ -37,7 +36,8 @@ public class MyGame implements ApplicationListener {
 
 	@Override
 	public void render() {	
-		this.showingScreen.render(Gdx.graphics.getDeltaTime());
+		this.showingScreen.update();
+		this.showingScreen.draw();
 	}
 
 	@Override
@@ -74,7 +74,7 @@ public class MyGame implements ApplicationListener {
 	private static class DesktopResolver implements Resolver {		
 		@Override
 		public void resolve(int which, int arg) {
-			System.out.println("Resolve: " + which);
+			System.out.println("Resolve: " + which + ", Arg: " + arg);
 		}
 	}
 	

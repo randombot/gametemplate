@@ -54,9 +54,12 @@ public class BaseScreen {
 				})));
 	}
 
-	public void render(float delta) { 
+	public void update() { 
+		stage.act();
+	}
+	
+	public void draw(){
 		clearColor();
-		stage.act(delta);
 		stage.draw();
 		Table.drawDebug(stage);
 	}

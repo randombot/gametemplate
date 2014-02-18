@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Scaling;
+import com.randombot.mygame.Resolver;
 import com.randombot.mygame.view.ModalDialog;
 
 public class Menu extends BaseScreen {
@@ -34,12 +35,12 @@ public class Menu extends BaseScreen {
 		Image logo = new Image(skin, "ic_logo");
 		logo.setScaling(Scaling.fit);
 
-		final Button play, help, credits, music, sound;
+		final Button play, help, credits, music, ranking;
 		play = new TextButton("Play", skin);
 		help = new TextButton("Help", skin);
 		credits = new TextButton("Credits", skin);
 		music = new TextButton("Music", skin, "toggle");
-		sound = new TextButton("Ranking", skin);
+		ranking = new TextButton("Ranking", skin);
 		
 		Table miniTable = new Table();
 		miniTable.pad(50f);
@@ -48,7 +49,7 @@ public class Menu extends BaseScreen {
 		miniTable.add(credits);	
 		miniTable.row();
 		miniTable.add(music);
-		miniTable.add(sound);	
+		miniTable.add(ranking);	
 		
 		root.defaults().expand().space(5f);
 		root.pad(10f);
@@ -94,13 +95,13 @@ public class Menu extends BaseScreen {
 				final Actor target = event.getListenerActor();
 				if (target == music) {
 					System.out.println("Change music state");
-				} else if (target == sound) {
-					System.out.println("Change sound state");
+				} else if (target == ranking) {
+					resolver.resolve(Resolver.RANKING, 0);
 				}
 			}
 		};
 		music.addListener(mMultimediaListener);
-		sound.addListener(mMultimediaListener);
+		ranking.addListener(mMultimediaListener);
 	}
 
 	@Override

@@ -50,13 +50,7 @@ public class ScreenManager extends BaseScreen {
 		am.load(SKIN_SRC, Skin.class);		
 	}
 	
-	@Override
-	public void render(float delta) {
-		act(delta);
-		draw();
-	}
-	
-	private void act(float delta) {
+	public void update() {
 		if (am.update()) {
 			Gdx.app.postRunnable(new Runnable(){
 				@Override
@@ -103,7 +97,7 @@ public class ScreenManager extends BaseScreen {
 		}
 	}
 
-	private void draw() {
+	public void draw() {
 		clearColor();
 		this.sb.begin();
 		this.loadingBar.draw(this.sb, this.xBar, this.yBar, this.wBar, this.hBar);

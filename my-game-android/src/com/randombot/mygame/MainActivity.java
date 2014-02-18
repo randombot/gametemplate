@@ -108,7 +108,7 @@ public class MainActivity extends AndroidApplication implements Resolver{
 	@Override
 	public void resolve(int which, int arg) {
 		switch (which){
-		case SWARM: {
+		case RANKING: {
 
 			break;
 		}
