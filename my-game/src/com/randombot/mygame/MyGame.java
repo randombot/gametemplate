@@ -28,7 +28,7 @@ public class MyGame implements ApplicationListener {
 	@Override
 	public void create() {
 		this.transitionManager = new TransitionManager();
-		this.screenManager = new ScreenManager(this, this.resolver);
+		this.screenManager = new ScreenManager(this, this.resolver, this.transitionManager);
 		this.showingScreen = this.screenManager;
 		this.showingScreen.create();
 	}
@@ -65,9 +65,8 @@ public class MyGame implements ApplicationListener {
 		changeScreen(next, null);
 	}
 	
-	public void changeScreen(BaseScreen next, Transition screenTransition){
-		this.transitionManager.prepateTransition(next, screenTransition);
-		this.showingScreen = this.transitionManager;
+	public void changeScreen(BaseScreen next, Transition screenTransition){		
+		this.showingScreen = this.transitionManager.prepateTransition(next, screenTransition);;
 	}
 	
 	public static void main(String[] args) {

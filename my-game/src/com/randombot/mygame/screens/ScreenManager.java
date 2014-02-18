@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Interpolation;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -15,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.randombot.mygame.MyGame;
 import com.randombot.mygame.Resolver;
 import com.randombot.mygame.screens.transitions.Slide;
+import com.randombot.mygame.screens.transitions.TransitionManager;
 
 public class ScreenManager extends BaseScreen {
 
@@ -27,10 +29,13 @@ public class ScreenManager extends BaseScreen {
 	private TextureAtlas atlas;
 	private float xBar, yBar, wBar, hBar;
 	private Batch sb;
+
+	private TransitionManager transitionManager;
 	
-	public ScreenManager(MyGame myGame, Resolver resolver) {
+	public ScreenManager(MyGame myGame, Resolver resolver, TransitionManager transitionManager) {
 		this.myGame = myGame;
 		this.resol = resolver;
+		this.transitionManager = transitionManager;
 	}
 	
 	@Override
@@ -93,7 +98,9 @@ public class ScreenManager extends BaseScreen {
 					play = new Play();
 					play.create();
 					
-					game.changeScreen(menu, Slide.init(1f, Slide.DOWN, false, Interpolation.bounceOut));
+					transitionManager.initialize();
+					
+					game.changeScreen(menu, Slide.init(1f, Slide.RANDOM, MathUtils.randomBoolean(), Interpolation.bounceOut));
 				}
 			});			
 		}

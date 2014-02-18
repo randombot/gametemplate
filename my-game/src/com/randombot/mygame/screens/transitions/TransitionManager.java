@@ -21,8 +21,8 @@ public class TransitionManager extends BaseScreen {
 	private TextureRegion nexTex;
 	private Batch batch;
 	private float time;
-
-	public TransitionManager(){
+	
+	public void initialize(){
 		int w = Gdx.graphics.getWidth();
 		int h = Gdx.graphics.getHeight();
 		nextFbo = new FrameBuffer(Format.RGB888, w, h, false);
@@ -40,14 +40,18 @@ public class TransitionManager extends BaseScreen {
 		originalViewport = cam.combined;
 	}
 
-	public void prepateTransition (BaseScreen screen,
-			Transition screenTransition) {
-		batch = stage.getSpriteBatch();
+	public BaseScreen prepateTransition (BaseScreen nextScr, Transition screenTransition) {
 		currScreen = game.showingScreen;
+		nextScreen = nextScr;
+		if(screenTransition == null){
+			currScreen.hide();
+			nextScreen.show();			
+			endTransition();
+			return nextScr;
+		}
+		
 		// start new transition
-		nextScreen = screen;
-		if (currScreen != null) currScreen.pause();
-		nextScreen.pause();
+		batch = stage.getSpriteBatch();
 		Gdx.input.setInputProcessor(null); // disable input
 		this.screenTransition = screenTransition;
 		time = 0;
@@ -61,13 +65,10 @@ public class TransitionManager extends BaseScreen {
 		nextFbo.begin();
 		nextScreen.draw();
 		nextFbo.end();	
+		return this;
 	}
 
-	public void update(float delta){
-		if(screenTransition == null){
-			endTransition();
-		}
-		
+	public void update(float delta){		
 		// get delta time and ensure an upper limit of one 60th second
 		float deltaTime = Math.min(delta, FIXED_TIMESTEP_LIMIT);
 

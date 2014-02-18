@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Interpolation;
+import com.badlogic.gdx.math.MathUtils;
 import com.randombot.mygame.screens.transitions.TransitionManager.Transition;
 
 public class Slide implements Transition {
@@ -12,6 +13,7 @@ public class Slide implements Transition {
 	public static final int RIGHT = 2;
 	public static final int UP = 3;
 	public static final int DOWN = 4;
+	public static final int RANDOM = 0;
 	private static final Slide instance =
 			new Slide();
 	private float duration;
@@ -21,7 +23,7 @@ public class Slide implements Transition {
 	public static Slide init (float duration,
 			int direction, boolean slideOut, Interpolation easing) {
 		instance.duration = duration;
-		instance.direction = direction;
+		instance.direction = direction == RANDOM ? MathUtils.random(LEFT, DOWN) : direction;
 		instance.slideOut = slideOut;
 		instance.easing = easing;
 		return instance;
