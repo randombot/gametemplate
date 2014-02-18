@@ -29,7 +29,7 @@ public class Fade implements Transition {
 		Gdx.gl.glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
-		batch.setColor(1, 1, 1, fadeCurrentScreen ? 1-alpha : 1);
+		if(fadeCurrentScreen) batch.setColor(1, 1, 1, 1-alpha);
 		batch.draw(currScreen, 0, 0);
 		batch.setColor(1, 1, 1, alpha);
 		batch.draw(nextScreen, 0, 0);

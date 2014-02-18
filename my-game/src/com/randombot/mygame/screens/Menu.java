@@ -2,6 +2,7 @@ package com.randombot.mygame.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
@@ -11,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Scaling;
 import com.randombot.mygame.Resolver;
+import com.randombot.mygame.screens.transitions.Slice;
 import com.randombot.mygame.view.ModalDialog;
 
 public class Menu extends BaseScreen {
@@ -68,7 +70,7 @@ public class Menu extends BaseScreen {
 				if (next == null) {
 					return;
 				}
-				game.changeScreen(next);
+				game.changeScreen(next, Slice.init(1f, Slice.RANDOM, 10, Interpolation.sineOut));
 			}
 
 			private BaseScreen getNextScreen(Actor target) {

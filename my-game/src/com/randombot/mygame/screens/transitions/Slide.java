@@ -1,7 +1,7 @@
 package com.randombot.mygame.screens.transitions;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Interpolation;
@@ -40,7 +40,7 @@ public class Slide implements Transition {
 		float h = currScreen.getRegionHeight();
 		float x = 0;
 		float y = 0;
-		if (easing != null) alpha = easing.apply(alpha);
+		alpha = easing.apply(alpha);
 		// calculate position
 		switch (direction) {
 		case LEFT:
@@ -65,7 +65,7 @@ public class Slide implements Transition {
 		TextureRegion texTop = slideOut ? currScreen : nextScreen;
 		// finally, draw both screens
 		Gdx.gl.glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
 		batch.draw(texBottom, 0, 0);
 		batch.draw(texTop, x, y);

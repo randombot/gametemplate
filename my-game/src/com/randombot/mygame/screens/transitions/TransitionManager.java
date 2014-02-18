@@ -25,8 +25,8 @@ public class TransitionManager extends BaseScreen {
 	public void initialize(){
 		int w = Gdx.graphics.getWidth();
 		int h = Gdx.graphics.getHeight();
-		nextFbo = new FrameBuffer(Format.RGB888, w, h, false);
-		currFbo = new FrameBuffer(Format.RGB888, w, h, false);
+		nextFbo = new FrameBuffer(Format.RGB565, w, h, false);
+		currFbo = new FrameBuffer(Format.RGB565, w, h, false);
 		setUpNormalProjection();
 		nexTex = new TextureRegion(nextFbo.getColorBufferTexture());
 		currTex = new TextureRegion(currFbo.getColorBufferTexture());
@@ -52,6 +52,7 @@ public class TransitionManager extends BaseScreen {
 		
 		// start new transition
 		batch = stage.getSpriteBatch();
+		batch.setColor(1f, 1f, 1f, 1f);
 		Gdx.input.setInputProcessor(null); // disable input
 		this.screenTransition = screenTransition;
 		time = 0;
@@ -70,18 +71,19 @@ public class TransitionManager extends BaseScreen {
 
 	public void update(float delta){		
 		// get delta time and ensure an upper limit of one 60th second
-		float deltaTime = Math.min(delta, FIXED_TIMESTEP_LIMIT);
+		if(delta > FIXED_TIMESTEP_LIMIT) delta = FIXED_TIMESTEP_LIMIT;
 
 		// ongoing transition
 		float duration = screenTransition.getDuration();
 		// update progress of ongoing transition
-		time = Math.min(time + deltaTime, duration);
-		if (time >= duration) {
+		time += delta;
+		if (time > duration) {
 			endTransition();
 		} else {
 			// render transition effect to screen
-			batch.setProjectionMatrix(originalViewport);
 			float alpha = time / duration;
+			batch.setColor(1f, 1f, 1f, 1f);
+			batch.setProjectionMatrix(originalViewport);
 			screenTransition.render(batch, currTex, nexTex, alpha);
 		}
 	}
@@ -92,8 +94,6 @@ public class TransitionManager extends BaseScreen {
 		Gdx.input.setInputProcessor(nextScreen.getInputProcessor());
 		// switch screens
 		game.showingScreen = nextScreen;
-		nextScreen = null;
-		screenTransition = null;
 	}
 
 	@Override
