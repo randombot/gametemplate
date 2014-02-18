@@ -4,13 +4,12 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.randombot.mygame.MyGame;
 import com.randombot.mygame.Resolver;
+import com.randombot.mygame.screens.transitions.Fade;
 
 public class BaseScreen {	
 	
@@ -44,17 +43,6 @@ public class BaseScreen {
 		gl20.glClear(GL20.GL_COLOR_BUFFER_BIT);
 	}
 
-	protected void exitAnimation(final BaseScreen next) {
-		root.addAction(Actions.sequence(
-				Actions.fadeOut(.25f, Interpolation.fade),
-				Actions.run(new Runnable() {
-					@Override
-					public void run() {
-						game.changeScreen(next);
-					}
-				})));
-	}
-
 	public void update(float delta) { 
 		stage.act(delta);
 	}
@@ -71,7 +59,6 @@ public class BaseScreen {
 
 	public void show() { 
 		root.setVisible(true);
-		root.addAction(Actions.fadeIn(.25f, Interpolation.fade));
 	}
 
 	public void hide() { 
@@ -89,6 +76,6 @@ public class BaseScreen {
 	public void dispose() { }
 	
 	public void onBackPressed(){
-		exitAnimation(previousScreen);
+		game.changeScreen(previousScreen, Fade.init(1f, true));
 	}
 }

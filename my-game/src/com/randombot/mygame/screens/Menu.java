@@ -68,7 +68,7 @@ public class Menu extends BaseScreen {
 				if (next == null) {
 					return;
 				}
-				exitAnimation(next);
+				game.changeScreen(next);
 			}
 
 			private BaseScreen getNextScreen(Actor target) {

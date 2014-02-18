@@ -6,6 +6,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -13,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.randombot.mygame.MyGame;
 import com.randombot.mygame.Resolver;
+import com.randombot.mygame.screens.transitions.Slide;
 
 public class ScreenManager extends BaseScreen {
 
@@ -91,7 +93,7 @@ public class ScreenManager extends BaseScreen {
 					play = new Play();
 					play.create();
 					
-					game.changeScreen(menu);
+					game.changeScreen(menu, Slide.init(1f, Slide.DOWN, false, Interpolation.bounceOut));
 				}
 			});			
 		}
@@ -113,5 +115,16 @@ public class ScreenManager extends BaseScreen {
 	}
 	
 	@Override
-	public void dispose() {	}
+	public void dispose() {
+		stage.dispose();
+		menu.dispose();
+		help.dispose();
+		credits.dispose();
+		play.dispose();
+		am.dispose();
+		am = null;
+		stage = null;
+		game = null;
+		resolver = null;
+	}
 }

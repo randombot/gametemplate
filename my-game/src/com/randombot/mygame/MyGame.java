@@ -6,19 +6,20 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.randombot.mygame.screens.BaseScreen;
 import com.randombot.mygame.screens.ScreenManager;
+import com.randombot.mygame.screens.transitions.TransitionManager;
+import com.randombot.mygame.screens.transitions.TransitionManager.Transition;
 
 public class MyGame implements ApplicationListener {
 	
 	public BaseScreen showingScreen;
 	private Resolver resolver;
 	private ScreenManager screenManager;
+	private TransitionManager transitionManager;
 	
 	//////////////////////////////////////////////////////////////////////////////////////////
 	private static final boolean PACKING = false;	
 	//////////////////////////////////////////////////////////////////////////////////////////
 	//// Comment added from iPad :)	
-	
-	////////////////TRANSITION//////////////
 
 	public MyGame(Resolver res){
 		this.resolver = res;
@@ -26,6 +27,7 @@ public class MyGame implements ApplicationListener {
 	
 	@Override
 	public void create() {
+		this.transitionManager = new TransitionManager();
 		this.screenManager = new ScreenManager(this, this.resolver);
 		this.showingScreen = this.screenManager;
 		this.showingScreen.create();
@@ -34,6 +36,7 @@ public class MyGame implements ApplicationListener {
 	@Override
 	public void dispose() {
 		this.screenManager.dispose();
+		this.transitionManager.dispose();
 		System.exit(0);
 	}
 
@@ -59,9 +62,12 @@ public class MyGame implements ApplicationListener {
 	}
 	
 	public void changeScreen(BaseScreen next){
-		this.showingScreen.hide();
-		this.showingScreen = next;
-		this.showingScreen.show();
+		changeScreen(next, null);
+	}
+	
+	public void changeScreen(BaseScreen next, Transition screenTransition){
+		this.transitionManager.prepateTransition(next, screenTransition);
+		this.showingScreen = this.transitionManager;
 	}
 	
 	public static void main(String[] args) {
