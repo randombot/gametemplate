@@ -39,7 +39,7 @@ public class Menu extends BaseScreen {
 		help = new TextButton("Help", skin);
 		credits = new TextButton("Credits", skin);
 		music = new TextButton("Music", skin, "toggle");
-		sound = new TextButton("Sound", skin, "toggle");
+		sound = new TextButton("Ranking", skin);
 		
 		Table miniTable = new Table();
 		miniTable.pad(50f);

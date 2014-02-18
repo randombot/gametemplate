@@ -1,7 +1,6 @@
 package com.randombot.mygame;
 
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,24 +16,27 @@ import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 
 public class MainActivity extends AndroidApplication implements Resolver{
-	
+
 	private AdView adView;
-		
+
 	private String facebook;
 	private String twitter;
+	private String market;
+	private String randombot;
 	private String appName;
 	private String googlePlay;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
-		final Resources res = getResources();		
-		this.facebook = res.getString(R.string.facebook);
-		this.twitter = res.getString(R.string.twitter);
-		this.appName = res.getString(R.string.app_name);
-		this.googlePlay = res.getString(R.string.google_play);
-		
+	
+		this.facebook = getString(R.string.facebook);
+		this.twitter = getString(R.string.twitter);
+		this.market = getString(R.string.market);
+		this.randombot = getString(R.string.randombot);
+		this.appName = getString(R.string.app_name);
+		this.googlePlay = getString(R.string.google_play);
+
 		// Create the layout
 		RelativeLayout layout = new RelativeLayout(this);
 
@@ -56,7 +58,7 @@ public class MainActivity extends AndroidApplication implements Resolver{
 		View gameView = initializeForView(new MyGame(this), cfg);
 
 		this.adView = new AdView(this);
-		this.adView.setAdUnitId(res.getString(R.string.ad_unit_id));
+		this.adView.setAdUnitId(getString(R.string.ad_unit_id));
 		this.adView.setAdSize(AdSize.BANNER);
 		this.adView.loadAd(new AdRequest.Builder().build());
 		/**
@@ -65,7 +67,7 @@ public class MainActivity extends AndroidApplication implements Resolver{
 		 * By calling setBackgroundColor we force the add to show itself as soon as it's loaded.
 		 */
 		this.adView.setBackgroundColor(Color.BLACK);
-		
+
 		// Add the libgdx view
 		layout.addView(gameView);
 
@@ -112,16 +114,34 @@ public class MainActivity extends AndroidApplication implements Resolver{
 		}
 		case SHARE: {
 			Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND); 
-		    sharingIntent.setType("text/plain");
-		    String shareBody = "Let's play " + this.appName + "!\n" + this.googlePlay;
-		    sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
-		    startActivity(Intent.createChooser(sharingIntent, "Share via"));
+			sharingIntent.setType("text/plain");
+			String shareBody = "Let's play " + this.appName + "!\n" + this.googlePlay;
+			sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+			startActivity(Intent.createChooser(sharingIntent, "Share via"));
 			break;
 		}
 		case SHOW_URI: {
-			Uri myUri = Uri.parse(arg == SHOW_URI_FACEBOOK ? 
-					MainActivity.this.facebook : 
-					MainActivity.this.twitter);
+			String res = "";
+			switch(arg){
+				case SHOW_URI_FACEBOOK:{
+						res = this.facebook;
+					break;
+				}
+				case SHOW_URI_TWITTER:{
+						res = this.twitter;	
+					break;
+				}
+				case SHOW_URI_MARKET:{
+						res = this.market;	
+					break;
+				}
+				case SHOW_URI_RANDOMBOT:{
+						res = this.randombot;	
+					break;
+				}
+			}
+
+			Uri myUri = Uri.parse(res);
 			Intent intent = new Intent(Intent.ACTION_VIEW, myUri);
 			intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
 			startActivity(intent);
