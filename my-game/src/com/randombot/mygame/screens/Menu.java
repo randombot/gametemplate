@@ -72,6 +72,7 @@ public class Menu extends BaseScreen {
 					return;
 				}
 				game.changeScreen(next, Slice.init(1f, MathUtils.randomBoolean(), Slice.RANDOM, 10, Interpolation.sineOut));
+				//game.changeScreen(next, FadeSlices.init(1f, false, 3));
 			}
 
 			private BaseScreen getNextScreen(Actor target) {

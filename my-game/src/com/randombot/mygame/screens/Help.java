@@ -1,5 +1,7 @@
 package com.randombot.mygame.screens;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 
@@ -32,5 +34,12 @@ public class Help extends BaseScreen {
 		
 		root.add(scroll);
 	}
+	
+//	@Override
+//	protected void clearColor() {
+//		GL20 gl20 = Gdx.gl20;
+//		gl20.glClearColor(0f, 0f, 0f, 1f);
+//		gl20.glClear(GL20.GL_COLOR_BUFFER_BIT);
+//	}
 		
 }
