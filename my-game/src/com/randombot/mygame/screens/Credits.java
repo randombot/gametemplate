@@ -38,13 +38,17 @@ public class Credits extends BaseScreen {
 		rblogo = new MenuButton("Daniel Nowendsztern\nDan Cristian Rotaru", skin, "icon-blitz");
 		root.add(rblogo).colspan(3).fill();
 
+		root.defaults().fill().expand();
+		
 		root.row();
 		twitter = new TextButton("Twitter", skin);
 		root.add(twitter);
 
+		root.row();
 		market = new TextButton("Market", skin);
 		root.add(market);
 
+		root.row();
 		fb = new TextButton("Facebook", skin);
 		root.add(fb);
 

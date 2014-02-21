@@ -18,7 +18,7 @@ import com.randombot.mygame.Resolver;
 import com.randombot.mygame.screens.transitions.Slide;
 import com.randombot.mygame.screens.transitions.TransitionManager;
 
-public class ScreenManager extends BaseScreen {
+public class LoadManager extends BaseScreen {
 
 	private final String SKIN_SRC = "data/skin/skin.json";
 	
@@ -32,7 +32,7 @@ public class ScreenManager extends BaseScreen {
 
 	private TransitionManager transitionManager;
 	
-	public ScreenManager(MyGame myGame, Resolver resolver, TransitionManager transitionManager) {
+	public LoadManager(MyGame myGame, Resolver resolver, TransitionManager transitionManager) {
 		this.myGame = myGame;
 		this.resol = resolver;
 		this.transitionManager = transitionManager;
@@ -100,7 +100,7 @@ public class ScreenManager extends BaseScreen {
 					
 					transitionManager.initialize();
 					
-					game.changeScreen(menu, Slide.init(1f, Slide.RANDOM, MathUtils.randomBoolean(), Interpolation.bounceOut));
+					game.changeScreen(menu, Slide.init(1f, Slide.DOWN, MathUtils.randomBoolean(), Interpolation.circleOut));
 				}
 			});			
 		}

@@ -5,7 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.randombot.mygame.screens.BaseScreen;
-import com.randombot.mygame.screens.ScreenManager;
+import com.randombot.mygame.screens.LoadManager;
 import com.randombot.mygame.screens.transitions.TransitionManager;
 import com.randombot.mygame.screens.transitions.TransitionManager.Transition;
 
@@ -13,7 +13,7 @@ public class MyGame implements ApplicationListener {
 	
 	public BaseScreen showingScreen;
 	private Resolver resolver;
-	private ScreenManager screenManager;
+	private LoadManager screenManager;
 	private TransitionManager transitionManager;
 	
 	//////////////////////////////////////////////////////////////////////////////////////////
@@ -28,7 +28,7 @@ public class MyGame implements ApplicationListener {
 	@Override
 	public void create() {
 		this.transitionManager = new TransitionManager();
-		this.screenManager = new ScreenManager(this, this.resolver, this.transitionManager);
+		this.screenManager = new LoadManager(this, this.resolver, this.transitionManager);
 		this.showingScreen = this.screenManager;
 		this.showingScreen.create();
 	}
