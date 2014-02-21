@@ -1,16 +1,12 @@
 package com.randombot.mygame;
 
-import java.io.IOException;
-
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.randombot.mygame.screens.BaseScreen;
 import com.randombot.mygame.screens.LoadManager;
+import com.randombot.mygame.screens.ScreenSaver;
 import com.randombot.mygame.screens.transitions.TransitionManager;
 import com.randombot.mygame.screens.transitions.TransitionManager.Transition;
 
@@ -41,23 +37,7 @@ public class MyGame implements ApplicationListener {
 		this.showingScreen = this.screenManager;
 		this.showingScreen.create();
 		if (PHOTO){
-			this.showingScreen.getStage().addListener(new InputListener(){
-				@Override
-				public boolean keyDown(InputEvent event, int keycode) {
-
-					if (keycode == Keys.ENTER){
-						try {
-							MyGame.this.showingScreen.saveScreenshot();
-						} catch (IOException e) { 
-							e.printStackTrace();
-						}
-					} else if (keycode == Keys.SPACE){
-						
-					}
-					
-					return super.keyDown(event, keycode);
-				}
-			});			
+			ScreenSaver.setUp();	
 		}
 	}
 
@@ -89,10 +69,18 @@ public class MyGame implements ApplicationListener {
 		this.showingScreen.resume();
 	}
 	
+	/**
+	 * Changes the Screen without any animation.
+	 * @param next
+	 */
 	public void changeScreen(BaseScreen next){
 		changeScreen(next, null);
 	}
 	
+	/**
+	 * Changes the Screen with an animation.
+	 * @param next
+	 */
 	public void changeScreen(BaseScreen next, Transition screenTransition){		
 		this.showingScreen = this.transitionManager.prepateTransition(next, screenTransition);;
 	}

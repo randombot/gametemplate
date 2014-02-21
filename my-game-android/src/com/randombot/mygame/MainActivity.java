@@ -123,22 +123,18 @@ public class MainActivity extends AndroidApplication implements Resolver{
 		case SHOW_URI: {
 			String res = "";
 			switch(arg){
-				case SHOW_URI_FACEBOOK:{
+				case SHOW_URI_FACEBOOK:
 						res = this.facebook;
 					break;
-				}
-				case SHOW_URI_TWITTER:{
+				case SHOW_URI_TWITTER:
 						res = this.twitter;	
 					break;
-				}
-				case SHOW_URI_MARKET:{
+				case SHOW_URI_MARKET:
 						res = this.market;	
 					break;
-				}
-				case SHOW_URI_RANDOMBOT:{
+				case SHOW_URI_RANDOMBOT:
 						res = this.randombot;	
 					break;
-				}
 			}
 
 			Uri myUri = Uri.parse(res);
