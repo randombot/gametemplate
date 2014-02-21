@@ -1,9 +1,14 @@
 package com.randombot.mygame;
 
+import java.io.IOException;
+
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.randombot.mygame.screens.BaseScreen;
 import com.randombot.mygame.screens.LoadManager;
 import com.randombot.mygame.screens.transitions.TransitionManager;
@@ -17,7 +22,11 @@ public class MyGame implements ApplicationListener {
 	private TransitionManager transitionManager;
 	
 	//////////////////////////////////////////////////////////////////////////////////////////
-	private static final boolean PACKING = false;	
+	private static final boolean PACKING = false;
+	private static final boolean COPY_ASSETS = false;	// TODO: Copy assets to android folder.	
+	private static final boolean DESCRIPTION = false;	// TODO: Press 'SPACE' to copy description.	
+	private static final boolean PHOTO = true;	// Press 'ENTER' to capture the screen.
+	public static final String GAME_NAME = "my-game";		
 	//////////////////////////////////////////////////////////////////////////////////////////
 	//// Comment added from iPad :)	
 
@@ -31,6 +40,25 @@ public class MyGame implements ApplicationListener {
 		this.screenManager = new LoadManager(this, this.resolver, this.transitionManager);
 		this.showingScreen = this.screenManager;
 		this.showingScreen.create();
+		if (PHOTO){
+			this.showingScreen.getStage().addListener(new InputListener(){
+				@Override
+				public boolean keyDown(InputEvent event, int keycode) {
+
+					if (keycode == Keys.ENTER){
+						try {
+							MyGame.this.showingScreen.saveScreenshot();
+						} catch (IOException e) { 
+							e.printStackTrace();
+						}
+					} else if (keycode == Keys.SPACE){
+						
+					}
+					
+					return super.keyDown(event, keycode);
+				}
+			});			
+		}
 	}
 
 	@Override
@@ -70,13 +98,14 @@ public class MyGame implements ApplicationListener {
 	}
 	
 	public static void main(String[] args) {
-		if (PACKING) { Packer.compile(); }
+		if (PACKING) { Packer.compile(); }		
 		LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
 		cfg.title = "my-game";
 		cfg.useGL20 = true;
 		cfg.width = 480;
 		cfg.height = 854;		
 		new LwjglApplication(new MyGame(new DesktopResolver()), cfg);
+		
 	}
 	
 	private static class DesktopResolver implements Resolver {		
@@ -85,5 +114,6 @@ public class MyGame implements ApplicationListener {
 			System.out.println("Resolve: " + which + ", Arg: " + arg);
 		}
 	}
+	
 	
 }
