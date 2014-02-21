@@ -82,6 +82,7 @@ public class LoadManager extends BaseScreen {
 							return false;
 						}
 					});
+					
 					Gdx.input.setInputProcessor(stage);
 					
 					skin = am.get(SKIN_SRC, Skin.class);

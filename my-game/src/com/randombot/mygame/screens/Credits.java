@@ -53,7 +53,7 @@ public class Credits extends BaseScreen {
 		root.add(fb);
 
 		// Creating the music/sound listener
-		ClickListener mMultimediaListener = new ClickListener() {
+		final ClickListener mMultimediaListener = new ClickListener() {
 
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
@@ -69,10 +69,12 @@ public class Credits extends BaseScreen {
 				}
 			}
 		};
+		
 		rblogo.addListener(mMultimediaListener);
 		twitter.addListener(mMultimediaListener);
 		market.addListener(mMultimediaListener);
 		fb.addListener(mMultimediaListener);
+		
 	}
 
 	@Override
