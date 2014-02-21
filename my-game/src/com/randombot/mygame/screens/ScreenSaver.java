@@ -43,9 +43,8 @@ public class ScreenSaver {
 					}
 				} else if (keycode == Keys.SPACE){
 					
-				}
-				
-				return super.keyDown(event, keycode);
+				}				
+				return true;
 			}
 		});		
 	}

@@ -19,9 +19,7 @@ public class MyGame implements ApplicationListener {
 	
 	//////////////////////////////////////////////////////////////////////////////////////////
 	private static final boolean PACKING = false;
-	private static final boolean COPY_ASSETS = false;	// TODO: Copy assets to android folder.	
-	private static final boolean DESCRIPTION = false;	// TODO: Press 'SPACE' to copy description.	
-	private static final boolean PHOTO = true;	// Press 'ENTER' to capture the screen.
+	private static final boolean PRE_MARKET = true;
 	public static final String GAME_NAME = "my-game";		
 	//////////////////////////////////////////////////////////////////////////////////////////
 	//// Comment added from iPad :)	
@@ -36,7 +34,7 @@ public class MyGame implements ApplicationListener {
 		this.screenManager = new LoadManager(this, this.resolver, this.transitionManager);
 		this.showingScreen = this.screenManager;
 		this.showingScreen.create();
-		if (PHOTO){
+		if (PRE_MARKET){
 			ScreenSaver.setUp();	
 		}
 	}
