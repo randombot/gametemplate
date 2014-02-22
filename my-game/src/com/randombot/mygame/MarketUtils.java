@@ -1,5 +1,7 @@
-package com.randombot.mygame.screens;
+package com.randombot.mygame;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
@@ -12,7 +14,8 @@ import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.PixmapIO;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.randombot.mygame.MyGame;
+import com.randombot.mygame.screens.BaseScreen;
+import com.randombot.mygame.screens.Help;
 
 public class MarketUtils {
 	
@@ -20,6 +23,9 @@ public class MarketUtils {
 	private static int photoNumber = 0;
 	
 	public static void setUp(){
+		String ppath = System.getProperty("user.dir");
+		androidDir = ppath.replace("\\", "/").replace(MyGame.GAME_NAME, MyGame.GAME_NAME+"-android");			
+		androidDir += "/market/";
 		BaseScreen.getStage().addListener(new InputListener(){
 			@Override
 			public boolean keyDown(InputEvent event, int keycode) {
@@ -31,10 +37,7 @@ public class MarketUtils {
 						e.printStackTrace();
 					}
 				} else if (keycode == Keys.SPACE){
-					
-					
-					
-					
+					copyDescription();
 				}				
 				return true;
 			}
@@ -42,11 +45,6 @@ public class MarketUtils {
 	}
 
 	private static void saveScreenshot() throws IOException {
-		if (androidDir == null){
-			String ppath = System.getProperty("user.dir");
-			androidDir = ppath.replace("\\", "/").replace(MyGame.GAME_NAME, MyGame.GAME_NAME+"-android");			
-			androidDir += "/market/";
-		}
 		int w = Gdx.graphics.getWidth();
 		int h = Gdx.graphics.getHeight();				
 		final Pixmap pixmap = new Pixmap(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), Format.RGBA8888);
@@ -64,5 +62,20 @@ public class MarketUtils {
 		System.out.println("Captured.");
 		PixmapIO.writePNG(new FileHandle(androidDir+(++photoNumber)+".png"), pixmap);
 	}
+	
+	private static void copyDescription(){
+		try {
+			FileWriter fw = new FileWriter(new File(androidDir+"descriptionForGooglePlay.txt"));
+			fw.append(Help.descriptionTitle+"\n");
+			fw.append(Help.descriptionText+"\n");
+			fw.append(Help.objectivesTitle+"\n");
+			fw.append(Help.objectivesText+"\n");
+			fw.close();		
+			System.out.println("Text copied.");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	
 }

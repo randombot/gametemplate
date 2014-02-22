@@ -6,7 +6,6 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.randombot.mygame.screens.BaseScreen;
 import com.randombot.mygame.screens.LoadManager;
-import com.randombot.mygame.screens.MarketUtils;
 import com.randombot.mygame.screens.transitions.TransitionManager;
 import com.randombot.mygame.screens.transitions.TransitionManager.Transition;
 
