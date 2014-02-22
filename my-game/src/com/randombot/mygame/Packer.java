@@ -19,7 +19,6 @@ import com.badlogic.gdx.tools.texturepacker.TexturePacker.Settings;
 
 public class Packer {
 
-	static String gameName = "my-game";
 	static String fontName = "dfpop-xhdpi";
 
 	/**
@@ -125,7 +124,7 @@ public class Packer {
 		// Copy result to Android Project ?		
 		File[] finalfiles = skinDir.listFiles();
 		for (File f : finalfiles){
-			File newfile = new File(f.getAbsolutePath().replace(gameName, gameName+"-android/assets/"));
+			File newfile = new File(f.getAbsolutePath().replace(MyGame.GAME_NAME, MyGame.GAME_NAME+"-android/assets/"));
 			try { copyFileUsingStream(f, newfile); } catch (IOException e) {}
 		}
 
