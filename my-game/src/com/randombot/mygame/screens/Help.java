@@ -7,16 +7,16 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 
 public class Help extends BaseScreen {
 	
-	final String descriptionTitle = "Game instructions";
-	final String descriptionText = "Lorem Ipsum es simplemente el texto de relleno de " +
+	public static final String descriptionTitle = "Game instructions";
+	public static final String descriptionText = "Lorem Ipsum es simplemente el texto de relleno de " +
 			"las imprentas y archivos de texto. Lorem Ipsum ha sido el texto " +
 			"de relleno est�ndar de las industrias desde el a�o 1500, cuando un " +
 			" tambien ingres� como texto de relleno en documentos electr�nicos, " +
 			"quedando esencialmente igual al original. Fue popularizado en los 60s " +
 			"impresor (N. del T. persona que se dedica a la imprenta) desconocido.";
 	
-	final String objectivesTitle = "Game objectives";
-	final String objectivesText = "Lorem Ipsum us� una galer�a de textos y los mezcl� de tal manera que logr� hacer " +
+	public static final String objectivesTitle = "Game objectives";
+	public static final String objectivesText = "Lorem Ipsum us� una galer�a de textos y los mezcl� de tal manera que logr� hacer " +
 			"las imprentas y archivos de texto. Lorem Ipsum ha sido el texto " +
 			"de relleno est�ndar de las industrias desde el a�o 1500, cuando un " +
 			"un libro de textos especimen. No s�lo sobrevivi� 500 a�os, sino que" +
