@@ -46,7 +46,6 @@ public class Menu extends BaseScreen {
 		ranking = new TextButton("Ranking", skin);
 		
 		Table miniTable = new Table();
-		miniTable.pad(50f);
 		miniTable.defaults().fill().expand().uniform().space(50f);
 		miniTable.add(help);
 		miniTable.add(credits);	
@@ -58,9 +57,9 @@ public class Menu extends BaseScreen {
 		root.pad(10f);
 		root.add(logo).colspan(2).padRight(60f).padLeft(60f).padTop(60f);
 		root.row();
-		root.add(play).colspan(2).fill().expand().padRight(100f).padLeft(100f).padTop(100f);		
+		root.add(play).colspan(2).fill().expand().padRight(120f).padLeft(120f).padTop(20f);		
 		root.row();
-		root.add(miniTable).expand().fill();
+		root.add(miniTable);
 
 		// Creating the transition listener
 		ClickListener mTransitionListener = new ClickListener() {

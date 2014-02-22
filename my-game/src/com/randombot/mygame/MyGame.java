@@ -18,9 +18,9 @@ public class MyGame implements ApplicationListener {
 	private TransitionManager transitionManager;
 	
 	//////////////////////////////////////////////////////////////////////////////////////////
-	private static final boolean PACKING = false;
+	private static final boolean PACKING = true;
 	private static final boolean PRE_MARKET = true;
-	public static final String GAME_NAME = "my-game";		
+	public static final String GAME_NAME = "my-game";	
 	//////////////////////////////////////////////////////////////////////////////////////////
 
 	public MyGame(Resolver res){
