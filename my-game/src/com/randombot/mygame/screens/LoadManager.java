@@ -14,9 +14,9 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.randombot.mygame.MyGame;
-import com.randombot.mygame.Resolver;
 import com.randombot.mygame.screens.transitions.Slide;
 import com.randombot.mygame.screens.transitions.TransitionManager;
+import com.randombot.mygame.utils.Resolver;
 
 public class LoadManager extends BaseScreen {
 

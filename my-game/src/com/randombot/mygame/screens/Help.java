@@ -53,12 +53,5 @@ public class Help extends BaseScreen {
 		root.add(scroll).fill().expand();
 		root.pad(0f, 30f, 0, 30f);
 	}
-	
-//	@Override
-//	protected void clearColor() {
-//		GL20 gl20 = Gdx.gl20;
-//		gl20.glClearColor(0f, 0f, 0f, 1f);
-//		gl20.glClear(GL20.GL_COLOR_BUFFER_BIT);
-//	}
 		
 }

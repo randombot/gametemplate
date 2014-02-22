@@ -13,8 +13,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Scaling;
-import com.randombot.mygame.Resolver;
 import com.randombot.mygame.screens.transitions.Slice;
+import com.randombot.mygame.utils.Resolver;
 import com.randombot.mygame.view.ModalDialog;
 
 public class Menu extends BaseScreen {

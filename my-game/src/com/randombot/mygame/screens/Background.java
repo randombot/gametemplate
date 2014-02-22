@@ -14,7 +14,7 @@ public class Background extends Image {
 	
 	public Background(Skin skin) {
 		super(skin, "bg");
-		width = BaseScreen.getStage().getWidth()*2f;
+		width = BaseScreen.getStage().getWidth()*2.5f;
 		dir = LEFT;
 		speed = MathUtils.random(width/24, width/18);
 		setBounds(0, 0, width, BaseScreen.getStage().getHeight());
@@ -23,8 +23,6 @@ public class Background extends Image {
 	@Override
 	public void act(float delta) {
 		super.act(delta);
-		
-		//System.out.println(getX());
 		
 		if (dir == RIGHT){
 			if (getX() > 1){

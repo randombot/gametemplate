@@ -8,6 +8,9 @@ import com.randombot.mygame.screens.BaseScreen;
 import com.randombot.mygame.screens.LoadManager;
 import com.randombot.mygame.screens.transitions.TransitionManager;
 import com.randombot.mygame.screens.transitions.TransitionManager.Transition;
+import com.randombot.mygame.utils.MarketUtils;
+import com.randombot.mygame.utils.Packer;
+import com.randombot.mygame.utils.Resolver;
 
 public class MyGame implements ApplicationListener {
 	
@@ -17,8 +20,8 @@ public class MyGame implements ApplicationListener {
 	private TransitionManager transitionManager;
 	
 	//////////////////////////////////////////////////////////////////////////////////////////
-	private static final boolean PACKING = true;
-	private static final boolean PRE_MARKET = true;
+	private static final boolean PACKING = false;
+	private static final boolean PRE_MARKET = false;
 	public static final String GAME_NAME = "my-game";	
 	//////////////////////////////////////////////////////////////////////////////////////////
 

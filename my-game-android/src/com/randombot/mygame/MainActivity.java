@@ -14,6 +14,7 @@ import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
+import com.randombot.mygame.utils.Resolver;
 
 public class MainActivity extends AndroidApplication implements Resolver{
 

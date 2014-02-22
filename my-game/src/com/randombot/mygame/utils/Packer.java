@@ -1,4 +1,4 @@
-package com.randombot.mygame;
+package com.randombot.mygame.utils;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.tools.texturepacker.TexturePacker;
 import com.badlogic.gdx.tools.texturepacker.TexturePacker.Settings;
+import com.randombot.mygame.MyGame;
 
 public class Packer {
 

@@ -1,4 +1,4 @@
-package com.randombot.mygame;
+package com.randombot.mygame.utils;
 
 public interface Resolver {
 	

@@ -9,8 +9,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.randombot.mygame.MyGame;
-import com.randombot.mygame.Resolver;
 import com.randombot.mygame.screens.transitions.Fade;
+import com.randombot.mygame.utils.Resolver;
 
 public class BaseScreen {	
 

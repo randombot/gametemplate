@@ -1,4 +1,4 @@
-package com.randombot.mygame;
+package com.randombot.mygame.utils;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -14,6 +14,7 @@ import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.PixmapIO;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.randombot.mygame.MyGame;
 import com.randombot.mygame.screens.BaseScreen;
 import com.randombot.mygame.screens.Help;
 
