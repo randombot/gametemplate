@@ -66,6 +66,7 @@ public class TransitionManager extends BaseScreen {
 		nextFbo.begin();
 		nextScreen.draw();
 		nextFbo.end();	
+		
 		return this;
 	}
 

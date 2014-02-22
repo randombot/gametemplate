@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -35,11 +36,11 @@ public class Menu extends BaseScreen {
 		.button("EXIT", true).key(Keys.ENTER, true)
 		.button("Keep playing", false).key(Keys.BACK, false).key(Keys.BACKSPACE, false);
 
-		Image logo = new Image(skin, "ic_logo");
+		Image logo = new Image(skin, "ic_logo");		
 		logo.setScaling(Scaling.fit);
 
 		final Button play, help, credits, music, ranking;
-		play = new TextButton("Play", skin);
+		play = new ImageButton(skin, "ic_playgame");
 		help = new TextButton("Help", skin);
 		credits = new TextButton("Credits", skin);
 		music = new TextButton("Music", skin, "toggle");

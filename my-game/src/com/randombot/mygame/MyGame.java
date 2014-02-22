@@ -13,7 +13,7 @@ public class MyGame implements ApplicationListener {
 	
 	public BaseScreen showingScreen;
 	private Resolver resolver;
-	private LoadManager screenManager;
+	private LoadManager loadManager;
 	private TransitionManager transitionManager;
 	
 	//////////////////////////////////////////////////////////////////////////////////////////
@@ -29,9 +29,9 @@ public class MyGame implements ApplicationListener {
 	@Override
 	public void create() {
 		this.transitionManager = new TransitionManager();
-		this.screenManager = new LoadManager(this, this.resolver, this.transitionManager);
-		this.showingScreen = this.screenManager;
-		this.showingScreen.create();
+		this.loadManager = new LoadManager(this, this.resolver, this.transitionManager);
+		this.showingScreen = this.loadManager;
+		this.showingScreen.create();		
 		if (PRE_MARKET){
 			MarketUtils.setUp();	
 		}
@@ -39,20 +39,21 @@ public class MyGame implements ApplicationListener {
 
 	@Override
 	public void dispose() {
-		this.screenManager.dispose();
+		this.loadManager.dispose();
 		this.transitionManager.dispose();
 		System.exit(0);
 	}
 
 	@Override
 	public void render() {	
-		this.showingScreen.update(Gdx.graphics.getDeltaTime());
+		float delta = Gdx.graphics.getDeltaTime();
+		this.showingScreen.update(delta);
 		this.showingScreen.draw();
 	}
 
 	@Override
 	public void resize(int width, int height) {
-		this.screenManager.resize();
+		this.loadManager.resize();
 	}
 
 	@Override

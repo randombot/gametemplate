@@ -27,6 +27,7 @@ public class BaseScreen {
 	protected static Help help;
 	protected static Credits credits;
 	protected static Play play;
+	protected static Background bg;
 
 	protected BaseScreen previousScreen;
 	protected Table root;

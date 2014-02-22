@@ -87,6 +87,9 @@ public class LoadManager extends BaseScreen {
 					
 					skin = am.get(SKIN_SRC, Skin.class);
 
+					Background bg = new Background(skin);
+					stage.addActor(bg);
+					
 					menu = new Menu();
 					menu.create();
 					
@@ -97,7 +100,7 @@ public class LoadManager extends BaseScreen {
 					credits.create();
 					
 					play = new Play();
-					play.create();
+					play.create();					
 					
 					transitionManager.initialize();
 					
