@@ -6,7 +6,7 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.randombot.mygame.screens.BaseScreen;
 import com.randombot.mygame.screens.LoadManager;
-import com.randombot.mygame.screens.ScreenSaver;
+import com.randombot.mygame.screens.MarketUtils;
 import com.randombot.mygame.screens.transitions.TransitionManager;
 import com.randombot.mygame.screens.transitions.TransitionManager.Transition;
 
@@ -22,7 +22,6 @@ public class MyGame implements ApplicationListener {
 	private static final boolean PRE_MARKET = true;
 	public static final String GAME_NAME = "my-game";		
 	//////////////////////////////////////////////////////////////////////////////////////////
-	//// Comment added from iPad :)	
 
 	public MyGame(Resolver res){
 		this.resolver = res;
@@ -35,7 +34,7 @@ public class MyGame implements ApplicationListener {
 		this.showingScreen = this.screenManager;
 		this.showingScreen.create();
 		if (PRE_MARKET){
-			ScreenSaver.setUp();	
+			MarketUtils.setUp();	
 		}
 	}
 
